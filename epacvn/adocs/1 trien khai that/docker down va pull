@@ -1,0 +1,12 @@
+docker compose -f docker-compose-epacvn.yml down -v
+docker compose -f docker-compose-epacvn.yml pull
+docker compose -f docker-compose-epacvn.yml up -d --force-recreate --no-deps
+
+
+
+
+
+
+-----------------------------------------------
+docker pull cskhhtms/epacvn_web:deploy_latest
+docker compose -f docker-compose-epacvn.yml up -d --force-recreate --no-deps epacvn_web

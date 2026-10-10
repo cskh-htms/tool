@@ -1,0 +1,5 @@
+
+
+kiem tra cau hinh cua service co label loki chua co labe loki la co loc
+--------------------------------
+docker inspect diem_sac_web --format '{{json .Config.Labels}}'

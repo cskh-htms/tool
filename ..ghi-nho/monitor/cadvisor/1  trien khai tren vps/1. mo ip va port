@@ -1,0 +1,5 @@
+sudo ufw allow from 103.252.122.111 to any port 2005 proto tcp
+sudo ufw allow from 103.252.122.111 to any port 2006 proto tcp
+sudo ufw deny 2005/tcp
+sudo ufw deny 2006/tcp
+sudo ufw reload

@@ -1,0 +1,24 @@
+
+
+---> DNS có resolve được không
+----------------------------------------------
+dig gmail.com +short
+
+dig gmail.com
+
+
+
+-> Có reach (tim duoc ip tren internet khong) được IP không
+----------------------------------------------
+ping gmail.com	
+
+
+-> Có mở port SMTP không
+------------------------------------------------
+nc aspmx.l.google.com 25
+
+
+
+-> Có connect SMTP được không
+----------------------------------
+

@@ -1,0 +1,9 @@
+
+
+
+
+
+
+------------------------------
+----------------
+openssl s_client -connect mail.htms.vn:993 -crlf

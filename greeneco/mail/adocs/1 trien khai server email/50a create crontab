@@ -1,0 +1,2 @@
+0 * * * * /opt/mailserver/backup.sh >> /var/log/mail-backup.log 2>&1
+*/30 * * * * /opt/mailserver/mega.sh >> /var/log/mail-backup.log 2>&1

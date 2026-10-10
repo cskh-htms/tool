@@ -1,0 +1,2 @@
+sudo docker exec -it mailserver \
+  setup email update cuongna@green-ecosystem.com Cuongna@2026

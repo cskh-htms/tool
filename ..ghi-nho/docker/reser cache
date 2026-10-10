@@ -1,0 +1,16 @@
+
+----
+---- xoa du lieu thua
+docker system prune -af
+
+
+
+----
+---- xoa cache
+docker builder prune -af
+
+
+
+
+
+

@@ -1,0 +1,24 @@
+
+
+
+
+
+
+------------------------------
+openssl s_client -connect htms.vn:443 -servername htms.vn
+
+openssl s_client -connect mail.htms.vn:465 -servername mail.htms.vn
+
+openssl s_client -connect mail.htms.vn:993 -servername mail.htms.vn
+
+openssl s_client -connect mail.htms.vn:995 -servername mail.htms.vn
+
+
+kiem tra ngay het han cua ssl
+---------------------
+openssl s_client -connect mail.htms.vn:465 -servername mail.htms.vn </dev/null 2>/dev/null | openssl x509 -noout -dates
+
+
+
+
+

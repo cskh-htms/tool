@@ -1,0 +1,29 @@
+
+sudo usermod -U mailaudit
+sudo usermod -s /bin/bash mailaudit
+
+
+
+
+--- cap sudo
+sudo tee /etc/sudoers.d/mailaudit >/dev/null <<'EOF'
+mailaudit ALL=(ALL) NOPASSWD:ALL
+EOF
+
+sudo chmod 440 /etc/sudoers.d/mailaudit
+sudo visudo -cf /etc/sudoers.d/mailaudit
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

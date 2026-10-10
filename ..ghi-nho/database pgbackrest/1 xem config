@@ -1,0 +1,1 @@
+nano cat /etc/pgbackrest/pgbackrest.conf

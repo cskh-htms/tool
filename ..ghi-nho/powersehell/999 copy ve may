@@ -1,0 +1,1 @@
+scp -P 23266 user_one_htms@103.252.122.111:~/database/datas/data-import.dump %USERPROFILE%\Desktop\

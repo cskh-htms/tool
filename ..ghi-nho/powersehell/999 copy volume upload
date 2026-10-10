@@ -1,0 +1,32 @@
+
+nen'
+------------------------------------
+ssh -t -p 23266 user_one_htms@103.252.122.111 "sudo tar -czf /tmp/uploads-backup.tar.gz -C /var/lib/docker/volumes/user_one_htms_diem_sac_uploads_volume/_data ."
+
+ls /tmp/uploads-backup.tar.gz
+
+
+
+
+
+tải'
+------------------------------------
+scp -P 23266 user_one_htms@103.252.122.111:/tmp/uploads-backup.tar.gz C:\Users\ADMIN\Desktop\
+
+dir  C:\Users\ADMIN\Desktop\
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

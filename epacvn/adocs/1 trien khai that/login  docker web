@@ -1,0 +1,1 @@
+docker -f docker-compose-epacvn.yml  exec -it epacvn_web sh

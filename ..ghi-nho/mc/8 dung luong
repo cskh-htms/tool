@@ -1,0 +1,31 @@
+-----
+----
+-----
+----
+---- tong dung luoong
+for b in $(mc ls local | awk '{print $5}'); do
+  echo "===== $b ====="
+  mc du "local/$b"
+done
+
+
+--
+--
+-- tung dung luong
+for b in $(mc ls --json local | jq -r 'select(.type=="folder") | .key'); do
+  echo "===== $b ====="
+  mc du "local/$b"
+done
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,26 @@
+$RepoDir = "C:\Users\ADMIN\Desktop\htms_web"
+$TargetDir = Join-Path $RepoDir ".ssh-temp"
+
+$PrivateKey = "C:\Users\ADMIN\.ssh\id_ed25519_github"
+$PublicKey = "C:\Users\ADMIN\.ssh\id_ed25519_github.pub"
+
+if (-not (Test-Path $PrivateKey)) {
+  Write-Host "Khong tim thay private key: $PrivateKey" -ForegroundColor Red
+  exit 1
+}
+
+New-Item -ItemType Directory -Force -Path $TargetDir | Out-Null
+
+Copy-Item -Force $PrivateKey (Join-Path $TargetDir "id_ed25519_github")
+
+if (Test-Path $PublicKey) {
+  Copy-Item -Force $PublicKey (Join-Path $TargetDir "id_ed25519_github.pub")
+}
+
+Write-Host "Da copy SSH key vao: $TargetDir" -ForegroundColor Green
+Write-Host "Private key: id_ed25519_github"
+Write-Host "Public key : id_ed25519_github.pub"
+
+Write-Host "   "
+Write-Host "-------------------------------"
+Write-Host "Đã copy thành công"

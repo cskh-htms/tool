@@ -1,0 +1,14 @@
+
+
+---- chay
+docker compose -f docker-compose-greeneco-exporters.yml up -d --force-recreate --no-deps
+
+
+---- down
+docker compose -f docker-compose-greeneco-exporters.yml down -v
+
+
+---  pull
+docker compose -f docker-compose-greeneco-exporters.yml pull
+
+

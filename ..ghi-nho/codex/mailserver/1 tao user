@@ -1,0 +1,128 @@
+--
+--
+sudo adduser mailaudit
+
+
+sudo usermod -aG adm,systemd-journal mailaudit
+
+
+
+-- Tạo file sudo giới hạn quyền audit Docker mailserver
+-----------------------------------------
+sudo visudo -f /etc/sudoers.d/mailaudit
+
+..............
+
+mailaudit ALL=(root) NOPASSWD: /usr/bin/docker ps, /usr/bin/docker logs mailserver, /usr/bin/docker logs roundcube, /usr/bin/docker inspect mailserver, /usr/bin/docker inspect roundcube, /usr/bin/docker exec mailserver postconf -n, /usr/bin/docker exec mailserver dovecot -n, /usr/bin/docker exec mailserver supervisorctl status, /usr/bin/docker exec mailserver setup email list, /usr/bin/docker exec mailserver setup alias list, /usr/bin/docker exec mailserver setup quota list
+
+.............
+
+
+4. Tạo thư mục SSH cho user
+sudo mkdir -p /home/mailaudit/.ssh
+
+
+5. Mở file thêm public key
+sudo nano /home/mailaudit/.ssh/authorized_keys
+
+
+( hay noi codex tao key cho ban)
+Dán public key SSH vào file đó, rồi lưu lại.
+
+................
+ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICrdjYMKZrIa42l50GC7kasMN2SQLOIz1pDh8WNLG9hW codex-roundcube-check
+
+................
+
+6. Sửa quyền SSH
+sudo chown -R mailaudit:mailaudit /home/mailaudit/.ssh
+sudo chmod 700 /home/mailaudit/.ssh
+sudo chmod 600 /home/mailaudit/.ssh/authorized_keys
+
+
+
+
+
+---
+---
+---  cap sudo
+sudo tee /etc/sudoers.d/mailaudit >/dev/null <<'EOF'
+mailaudit ALL=(ALL) NOPASSWD:ALL
+EOF
+
+sudo chmod 440 /etc/sudoers.d/mailaudit
+sudo visudo -cf /etc/sudoers.d/mailaudit
+
+
+
+
+
+
+
+
+
+7. Test user
+sudo -iu mailaudit
+
+
+8. Test quyền audit
+sudo docker ps
+sudo docker logs mailserver
+sudo docker inspect mailserver
+sudo docker exec mailserver postconf -n
+sudo docker exec mailserver dovecot -n
+sudo docker exec mailserver supervisorctl status
+sudo docker exec mailserver setup email list
+sudo docker exec mailserver setup alias list
+sudo docker exec mailserver setup quota list
+
+
+9. Gửi mình thông tin đăng nhập
+
+IP:
+Port SSH:
+User: mailaudit
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

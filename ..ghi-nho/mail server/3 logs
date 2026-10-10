@@ -1,0 +1,30 @@
+-----------
+-----------
+docker logs -f mailserver
+
+
+
+
+------------------------------------
+docker logs -f mailserver | grep -iE 'auth|login|fail|error'
+
+
+
+docker logs mailserver | grep postfix | tail -n 50
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

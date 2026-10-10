@@ -1,0 +1,8 @@
+scripts/test.zip
+/minio/
+
+!/ssh/key/
+/ssh/key/*
+!/ssh/key/.gitkeep
+
+# Deployment credentials and runtime state must never be committed.

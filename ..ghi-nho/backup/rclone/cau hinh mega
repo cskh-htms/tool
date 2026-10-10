@@ -1,0 +1,19 @@
+sudo rclone config
+
+chon n
+dat ten mega
+nhap so 38 (mega)
+nhap user va mat khau
+option password  -> y
+nhap mat khau
+
+2fa -> enter
+
+
+Edit advanced config?  -> n
+Configuration complete -> y
+Current remotes -> q
+
+----
+---- file cau hinh 
+sudo nano /root/.config/rclone/rclone.conf

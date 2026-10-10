@@ -1,0 +1,6 @@
+sudo systemctl stop nginx && \
+sudo certbot certonly --expand --standalone \
+  -d mail.greeneco-system.com \
+  -d smtp.greeneco-system.com \
+  -d imap.greeneco-system.com && \
+sudo systemctl start nginx

@@ -1,0 +1,6 @@
+--
+--
+--
+--
+1. luon cau hinh rclone co root chu khong phai user hien tail
+  vi da so script va crontab la root

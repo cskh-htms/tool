@@ -1,0 +1,12 @@
+SELECT pid, usename, datname, client_addr, state
+FROM pg_stat_activity;
+
+
+
+---- show max connection ( hien thi cau hinh max conenct tion)
+SHOW max_connections;
+
+----- connect dang hoat dong
+SELECT COUNT(*) 
+FROM pg_stat_activity
+WHERE state = 'active';

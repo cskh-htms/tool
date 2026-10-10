@@ -1,0 +1,8 @@
+
+
+-----
+dropdb -U user db_moi
+
+----
+createdb -U user db_moi
+

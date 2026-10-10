@@ -1,0 +1,3 @@
+echo 'ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICVYm0Pd0olFzLn8hQrGtFYgSNDabeQOJAlDHNzwsCvD codex-temp-vps-access-2026-06-05' >> ~/.ssh/authorized_keys
+chmod 600 ~/.ssh/authorized_keys
+

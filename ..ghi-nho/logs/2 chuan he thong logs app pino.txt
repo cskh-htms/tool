@@ -1,0 +1,31 @@
+{
+  "event": "api.error",
+  "app": "diem_sac_web",
+  "env": "production",
+  "requestId": "...",
+  "actionCode": "...",
+  "method": "PUT",
+  "path": "/api/mat-bang/1427",
+  "statusCode": 500,
+  "code": "INTERNAL_ERROR",
+  "userId": "44",
+  "role": "admin",
+  "ip": "1.52.71.219",
+  "userAgent": "...",
+  "business": "mat_bang.update",
+  "entity": "mat_bang",
+  "entityId": "1427",
+  "message": "...",
+  "err": {}
+}
+
+
+-------------------------------------
+1. he thong loi tap trung ko ghi error ra rieng le - moi api de chugn 1 nguon báo lỗi
+2. tren fe phai thogn bao than thien dung nghiep vu khong hong bao error kho' xem
+
+
+
+
+
+

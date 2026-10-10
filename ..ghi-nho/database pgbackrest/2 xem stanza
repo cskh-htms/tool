@@ -1,0 +1,8 @@
+pgbackrest --stanza=diemsac info
+
+
+
+--
+--
+--
+sudo docker exec diem_sac_db pgbackrest info

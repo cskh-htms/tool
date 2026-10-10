@@ -1,0 +1,34 @@
+-
+---
+---
+---
+docker exec -it diem_sac_db psql -U diem_sac_user -d diem_sac_db
+
+
+
+-- 
+select * from pg_stat_archiver;
+
+-> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

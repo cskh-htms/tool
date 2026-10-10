@@ -1,0 +1,15 @@
+
+
+--
+-- ep chay wal de kiem tra
+select pg_switch_wal();
+
+
+
+--
+pgbackrest info
+
+
+
+---
+pgbackrest --stanza=diemsac check

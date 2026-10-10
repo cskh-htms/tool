@@ -1,0 +1,31 @@
+
+
+
+--- gui tin
+curl -X POST "https://api.telegram.org/bot8674412445:AAGU5s7mMLe2Ecwt5QCHoNPARa0g7zxDdc4/sendMessage" \
+  -d "chat_id=-1003526970766" \
+  -d "text=hello from bot"
+
+
+
+
+
+-- gui file
+
+curl -X POST "https://api.telegram.org/bot<TOKEN>/sendDocument" \
+  -F "chat_id=-1003526970766" \
+  -F "document=@/duong-dan/toi/file-backup.zip"
+
+
+
+
+
+
+
+
+
+
+
+
+
+

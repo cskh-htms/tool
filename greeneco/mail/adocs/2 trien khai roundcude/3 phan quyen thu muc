@@ -1,0 +1,4 @@
+sudo mkdir -p  /opt/webmail/ && \
+sudo chown -R root:root /opt/webmail && \
+sudo chmod 755 /opt/webmail && \
+sudo chmod 644 ./docker-compose-webmail.yml

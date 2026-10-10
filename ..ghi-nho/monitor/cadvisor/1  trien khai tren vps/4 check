@@ -1,0 +1,2 @@
+curl http://127.0.0.1:2005/metrics
+curl http://127.0.0.1:2006/metrics

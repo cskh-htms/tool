@@ -1,0 +1,6 @@
+
+
+------- chay trong devcontainer
+----------------------------------------------------------------------
+
+export GIT_SSH_COMMAND='ssh -i /app/.ssh-temp/id_ed25519_github -o IdentitiesOnly=yes'

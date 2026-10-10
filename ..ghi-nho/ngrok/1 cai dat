@@ -1,0 +1,27 @@
+
+--
+--
+--
+winget install ngrok.ngrok
+
+
+-- check
+ngrok version
+
+
+--
+ngrok update
+
+
+
+
+
+
+
+
+
+
+
+
+
+

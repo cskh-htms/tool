@@ -1,0 +1,266 @@
+-- tao index trgm
+CREATE EXTENSION IF NOT EXISTS pg_trgm;
+CREATE EXTENSION IF NOT EXISTS unaccent;
+
+
+CREATE OR REPLACE FUNCTION immutable_unaccent(text)
+RETURNS text
+LANGUAGE sql
+IMMUTABLE
+AS $$
+  SELECT unaccent($1)
+$$;
+
+
+CREATE INDEX IF NOT EXISTS idx_matbang_search_all
+ON mat_bang
+USING gin (
+  immutable_unaccent(
+    coalesce(chu_mat_bang, '') || ' ' ||
+    coalesce(ma_mat_bang, '') || ' ' ||
+    coalesce(dien_thoai_lien_he, '')
+  ) gin_trgm_ops
+);
+------------------------------------
+
+function buildSearchExpression() {
+  return Prisma.sql`
+    immutable_unaccent(
+      lower(
+        coalesce(mb.chu_mat_bang, '') || ' ' ||
+        coalesce(mb.ma_mat_bang, '') || ' ' ||
+        coalesce(mb.dien_thoai_lien_he, '')
+      )
+    )
+  `;
+}
+
+function buildCodeExpression() {
+  return Prisma.sql`
+    immutable_unaccent(lower(coalesce(mb.ma_mat_bang, '')))
+  `;
+}
+
+function buildPhoneExpression() {
+  return Prisma.sql`
+    immutable_unaccent(lower(coalesce(mb.dien_thoai_lien_he, '')))
+  `;
+}
+
+export async function GET(req: NextRequest) {
+  try {
+    const token = await getAccessToken(req);
+    const user = await requireRole(
+      token as string,
+      'admin',
+      'ctv',
+      'cmb',
+      'quanlytu',
+    );
+
+    const { prisma } = await import('@/lib/prisma');
+
+    const { searchParams } = new URL(req.url);
+    const keyword = (searchParams.get('keyword') ?? '').trim().toLowerCase();
+    const status = (searchParams.get('status') ?? '').trim();
+    const paymentType = (searchParams.get('paymentType') ?? '').trim();
+    const tuStatus = (searchParams.get('tuStatus') ?? '').trim();
+    const noteFilter = (searchParams.get('noteFilter') ?? '').trim();
+    const fromDate = (searchParams.get('fromDate') ?? '').trim();
+    const toDate = (searchParams.get('toDate') ?? '').trim();
+    const ctvUserId = Number(searchParams.get('ctvUserId') ?? 0);
+    const pageParam = Number(searchParams.get('page') ?? DEFAULT_PAGE);
+    const limitParam = Number(searchParams.get('limit') ?? DEFAULT_LIMIT);
+    const page = Number.isFinite(pageParam) && pageParam > 0
+      ? Math.floor(pageParam)
+      : DEFAULT_PAGE;
+    const limit = Number.isFinite(limitParam) && limitParam > 0
+      ? Math.min(Math.floor(limitParam), MAX_LIMIT)
+      : DEFAULT_LIMIT;
+    const skip = (page - 1) * limit;
+
+    const searchExpression = buildSearchExpression();
+    const codeExpression = buildCodeExpression();
+    const phoneExpression = buildPhoneExpression();
+    const visibilitySql =
+      user.role === 'admin'
+        ? Prisma.sql`
+            AND (
+              mb.trang_thai <> 'moi_tao'
+              OR EXISTS (
+                SELECT 1
+                FROM user_mat_bang_links uml_admin
+                WHERE uml_admin.mat_bang_id = mb.id
+                  AND uml_admin.user_id = ${user.userId}
+              )
+            )
+          `
+        : user.role === 'ctv'
+          ? Prisma.sql`
+              AND (
+                mb.trang_thai <> 'moi_tao'
+                OR EXISTS (
+                  SELECT 1
+                  FROM user_mat_bang_links uml_ctv
+                  WHERE uml_ctv.mat_bang_id = mb.id
+                    AND uml_ctv.user_id = ${user.userId}
+                )
+              )
+            `
+          : Prisma.sql`AND mb.trang_thai <> 'moi_tao'`;
+    const ctvScopeSql =
+      user.role === 'ctv'
+        ? Prisma.sql`
+            AND (
+              EXISTS (
+                SELECT 1
+                FROM user_mat_bang_links uml
+                WHERE uml.mat_bang_id = mb.id
+                  AND uml.user_id = ${user.userId}
+              )
+              OR (
+                mb.trang_thai <> 'moi_tao'
+                AND EXISTS (
+                  SELECT 1
+                  FROM user_mat_bang_links uml
+                  INNER JOIN users u ON u.id = uml.user_id
+                  WHERE uml.mat_bang_id = mb.id
+                    AND u.parent_id = ${user.userId}
+                )
+              )
+            )
+          `
+        : Prisma.sql``;
+    const adminHiddenStatusSql =
+      user.role === 'admin'
+        ? Prisma.sql`AND mb.trang_thai <> 'trinh_ctv'`
+        : Prisma.sql``;
+    const isNoteFilterActive =
+      noteFilter === 'has_notes' || noteFilter === 'no_notes';
+    const noteFilterSql =
+      noteFilter === 'has_notes'
+        ? Prisma.sql`
+            AND mb.trang_thai NOT IN ('moi_tao', 'trinh_ctv', 'mb_khong_du_dieu_kien')
+            AND NULLIF(BTRIM(coalesce(mb.kich_thuoc, '')), '') IS NOT NULL
+          `
+        : noteFilter === 'no_notes'
+          ? Prisma.sql`
+              AND mb.trang_thai NOT IN ('moi_tao', 'trinh_ctv', 'mb_khong_du_dieu_kien')
+              AND NULLIF(BTRIM(coalesce(mb.kich_thuoc, '')), '') IS NULL
+            `
+          : Prisma.sql``;
+    const statusSql =
+      !isNoteFilterActive && status && status !== 'all'
+        ? Prisma.sql`AND mb.trang_thai = ${status}`
+        : Prisma.sql``;
+    const paymentTypeSql =
+      !isNoteFilterActive && paymentType && paymentType !== 'all'
+        ? Prisma.sql`AND mb.chu_ky_thue_mat_bang = ${paymentType}`
+        : Prisma.sql``;
+    const tuStatusSql =
+      !isNoteFilterActive && tuStatus && tuStatus !== 'all'
+        ? Prisma.sql`AND mb.trang_thai_quan_ly_tu = ${tuStatus}`
+        : Prisma.sql``;
+    const ctvUserSql =
+      !isNoteFilterActive && ctvUserId > 0
+        ? Prisma.sql`
+            AND EXISTS (
+              SELECT 1
+              FROM user_mat_bang_links uml_filter
+              INNER JOIN users u_filter ON u_filter.id = uml_filter.user_id
+              WHERE uml_filter.mat_bang_id = mb.id
+                AND uml_filter.user_id = ${ctvUserId}
+                AND u_filter.role = 'ctv'
+            )
+          `
+        : Prisma.sql``;
+    const fromDateSql = !isNoteFilterActive && fromDate
+      ? Prisma.sql`AND mb.ngay_gui_trinh_duyet >= ${fromDate}::date`
+      : Prisma.sql``;
+    const toDateSql = !isNoteFilterActive && toDate
+      ? Prisma.sql`AND mb.ngay_gui_trinh_duyet <= ${toDate}::date`
+      : Prisma.sql``;
+    const keywordSql = !isNoteFilterActive && keyword
+      ? Prisma.sql`
+          AND (
+            ${codeExpression} = immutable_unaccent(${keyword})
+            OR ${phoneExpression} = immutable_unaccent(${keyword})
+            OR ${searchExpression} % immutable_unaccent(${keyword})
+            OR ${searchExpression} ILIKE immutable_unaccent(${`%${keyword}%`})
+          )
+        `
+      : Prisma.sql``;
+    const hasExactKeywordMatch = !isNoteFilterActive && keyword
+      ? await prisma.$queryRaw<Array<{ found: number }>>`
+          SELECT 1 AS found
+          FROM mat_bang mb
+          WHERE 1 = 1
+          ${visibilitySql}
+          ${adminHiddenStatusSql}
+          ${statusSql}
+          ${paymentTypeSql}
+          ${tuStatusSql}
+          ${fromDateSql}
+          ${toDateSql}
+          ${ctvScopeSql}
+          AND (
+            ${codeExpression} = immutable_unaccent(${keyword})
+            OR ${phoneExpression} = immutable_unaccent(${keyword})
+          )
+          LIMIT 1
+        `
+      : [];
+    const useExactOnly = hasExactKeywordMatch.length > 0;
+    const exactOnlySql =
+      !isNoteFilterActive && keyword && useExactOnly
+        ? Prisma.sql`
+            AND (
+              ${codeExpression} = immutable_unaccent(${keyword})
+              OR ${phoneExpression} = immutable_unaccent(${keyword})
+            )
+          `
+        : Prisma.sql``;
+    const orderBySql = isNoteFilterActive
+      ? Prisma.sql`
+          ORDER BY mb.ngay_gui_trinh_duyet DESC NULLS LAST, mb.updated_at DESC NULLS LAST
+        `
+      : keyword
+      ? user.role === 'admin'
+        ? Prisma.sql`
+          ORDER BY
+            CASE
+              WHEN ${codeExpression} = immutable_unaccent(${keyword}) THEN 0
+              WHEN ${phoneExpression} = immutable_unaccent(${keyword}) THEN 1
+              WHEN ${codeExpression} ILIKE immutable_unaccent(${`${keyword}%`}) THEN 2
+              ELSE 3
+            END,
+            similarity(${searchExpression}, immutable_unaccent(${keyword})) DESC,
+            mb.ngay_gui_trinh_duyet DESC NULLS LAST,
+            mb.created_at DESC
+        `
+        : Prisma.sql`
+          ORDER BY
+            CASE
+              WHEN ${codeExpression} = immutable_unaccent(${keyword}) THEN 0
+              WHEN ${phoneExpression} = immutable_unaccent(${keyword}) THEN 1
+              WHEN ${codeExpression} ILIKE immutable_unaccent(${`${keyword}%`}) THEN 2
+              ELSE 3
+            END,
+            similarity(${searchExpression}, immutable_unaccent(${keyword})) DESC,
+            mb.created_at DESC
+        `
+      : user.role === 'admin'
+        ? Prisma.sql`
+          ORDER BY mb.ngay_gui_trinh_duyet DESC NULLS LAST, mb.created_at DESC
+        `
+        : Prisma.sql`
+          ORDER BY mb.created_at DESC
+        `;
+--------------------------------------
+hay hoc ky thuat tao index voi pg_trgm  -- trong code nay  de ap dung vao du an --- cac  tinh thnah , phuong xa, ten nguoi su dung, thua dat -- dia chi --- chung ta se search live    
+-----------------------------
+
+1. search du 3 tu tro len moi co ket qua -> delay 0.2 s troung khi goi api ----- uu tien ket qua chinh xac truoc hien len dau tien -- tiep theo moi toi cac ket qua gan dug -
+2. search tieng viet khong dau 
+3. chu yeu bao dam search live a hkong lag khi du lieu nhieu -----
+4. -- haythem vao .md rule --- cac search live hay tao index trgm   va ky thuat saerch lie ko lag nay -----

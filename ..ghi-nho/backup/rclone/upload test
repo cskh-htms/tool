@@ -1,0 +1,9 @@
+
+----
+-----------------------------
+mkdir -p /tmp/test_rclone
+echo "ok" > /tmp/test_rclone/test.txt
+
+rclone copy /tmp/test_rclone mega:/test_rclone
+
+

@@ -1,0 +1,12 @@
+
+cp /home/user_one_htms/tool-htms/docker/docker-compose-exporters.yml /home/user_one_htms/
+
+
+chmod +x /home/user_one_htms/docker-compose-exporters.yml
+
+
+ls -l  /home/user_one_htms/
+
+cat /home/user_one_htms/docker-compose-exporters.yml
+
+

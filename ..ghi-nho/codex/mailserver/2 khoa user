@@ -1,0 +1,3 @@
+sudo usermod -L mailaudit
+sudo usermod -s /usr/sbin/nologin mailaudit
+sudo rm -f /etc/sudoers.d/mailaudit

@@ -1,0 +1,27 @@
+--
+--
+--
+--
+--
+mc admin policy list local
+
+
+
+
+---
+---
+for u in $(mc admin user list local | awk '{print $2}'); do
+  echo "===== USER: $u ====="
+  mc admin user info local "$u"
+done
+
+
+
+
+
+
+
+
+
+
+

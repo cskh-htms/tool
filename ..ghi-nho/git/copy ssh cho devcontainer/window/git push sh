@@ -1,0 +1,85 @@
+#!/bin/bash
+
+# ===============================
+# CONFIG
+# ===============================
+SCRIPT_DIR="$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)"
+REPO_DIR="$(CDPATH= cd -- "$SCRIPT_DIR/.." && pwd)"
+GIT_NAME="cskh-htms"
+GIT_EMAIL="cskh.htms.vn@gmail.com"
+BRANCH="main"
+VERSIONS_DIR="$REPO_DIR/.aversions"
+VERSION_FILE_LABEL="none"
+SSH_KEY="/app/.ssh-temp/id_ed25519_github"
+
+# ===============================
+# SSH SETUP
+# ===============================
+if [ ! -f "$SSH_KEY" ]; then
+  echo "Khong tim thay SSH key: $SSH_KEY"
+  exit 1
+fi
+
+chmod 700 /app/.ssh-temp
+chmod 600 "$SSH_KEY"
+
+mkdir -p /root/.ssh
+ssh-keyscan -H github.com >> /root/.ssh/known_hosts 2>/dev/null
+
+export GIT_SSH_COMMAND="ssh -i $SSH_KEY -o IdentitiesOnly=yes -o StrictHostKeyChecking=no"
+
+# ===============================
+# SET GIT USER (GLOBAL)
+# ===============================
+git config --global user.name "$GIT_NAME"
+git config --global user.email "$GIT_EMAIL"
+
+# ===============================
+# CHECK DIR
+# ===============================
+if [ ! -d "$REPO_DIR" ]; then
+  echo "Khong tim thay thu muc: $REPO_DIR"
+  exit 1
+fi
+
+cd "$REPO_DIR" || exit 1
+
+echo "Repo: $(pwd)"
+
+if [ -d "$VERSIONS_DIR" ]; then
+  VERSION_FILE_LABEL="$(
+    find "$VERSIONS_DIR" -type f \
+      | sort -V \
+      | tail -n 1 \
+      | xargs -r basename
+  )"
+
+  if [ -z "$VERSION_FILE_LABEL" ]; then
+    VERSION_FILE_LABEL="none"
+  fi
+fi
+
+# ===============================
+# TIME FORMAT
+# ===============================
+CURRENT_DATE=$(date "+%Y-%m-%d %H:%M")
+COMMIT_TEXT="update ${VERSION_FILE_LABEL} ${CURRENT_DATE}"
+
+# ===============================
+# GIT ACTIONS
+# ===============================
+echo "git add ."
+git add .
+
+echo "git commit"
+git commit -m "$COMMIT_TEXT" || echo "Khong co thay doi de commit"
+
+echo "git push (SSH)"
+git push origin "$BRANCH"
+
+if [ $? -ne 0 ]; then
+  echo "Push that bai"
+  exit 1
+fi
+
+echo "Push thanh cong!"

@@ -1,0 +1,9 @@
+
+
+
+
+
+
+------------------------------
+----------------
+openssl s_client -connect mail.htms.vn:465 -servername mail.htms.vn

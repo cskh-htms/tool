@@ -1,0 +1,1 @@
+chmod +x ./scripts/git-push-force.sh && ./scripts/git-push-force.sh

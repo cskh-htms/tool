@@ -1,0 +1,47 @@
+---
+--
+
+-- 2 . 
+-- bat lai wal
+docker exec -it diem_sac_db_demo psql -U diem_sac_user_demo -d diem_sac_db_demo -c "ALTER SYSTEM SET archive_mode = on;"
+
+docker exec -it diem_sac_db_demo psql -U diem_sac_user_demo -d diem_sac_db_demo -c "ALTER SYSTEM SET archive_command = 'pgbackrest --stanza=demo archive-push %p';"
+
+docker restart diem_sac_db_demo
+
+
+
+-- 3 . 
+-- tao lai stanza
+docker exec -it diem_sac_db_demo pgbackrest --stanza=demo stanza-create
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

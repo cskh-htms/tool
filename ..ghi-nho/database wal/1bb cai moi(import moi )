@@ -1,0 +1,46 @@
+---
+--
+-- 1. tat wal
+vao minio xoa thu muc archive va backup
+
+-- 2 . 
+-- xoa stanza
+docker exec -it diem_sac_db_demo pgbackrest --stanza=demo stanza-delete --force
+
+
+
+-- 3 . 
+-- xoa stanza
+docker exec -it diem_sac_db_demo pgbackrest --stanza=demo stanza-delete --force
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

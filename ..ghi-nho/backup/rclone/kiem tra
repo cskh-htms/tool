@@ -1,0 +1,22 @@
+
+----
+-----------------------------
+rclone listremotes
+.. 
+phai tim thay mega
+
+
+
+
+
+---- file va thuc muc
+-----------------------------
+rclone ls mega:
+
+
+
+
+sudo -u user_one_htms rclone ls mega:
+
+
+

@@ -1,0 +1,2 @@
+docker exec -it mailserver \
+  setup email add cuongna@epacvn.com  Ne@2025

@@ -1,0 +1,6 @@
+
+
+# chạy trong devcontainer
+chmod 700 /app/.ssh-temp
+chmod 600 /app/.ssh-temp/id_ed25519_github
+chmod 644 /app/.ssh-temp/id_ed25519_github.pub

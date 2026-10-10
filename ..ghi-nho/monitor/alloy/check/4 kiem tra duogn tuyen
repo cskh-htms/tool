@@ -1,0 +1,11 @@
+curl -sG 'https://loki.htms.vn/loki/api/v1/query_range' \
+  --data-urlencode 'query={host="diemsac",container="diem_sac_web"}' \
+  --data-urlencode "start=$(date -d '30 minutes ago' +%s%N)" \
+  --data-urlencode "end=$(date +%s%N)" \
+  --data-urlencode "limit=20" | jq '.data.result[]?.values[]'
+
+
+
+
+
+  ----------------------------------------------

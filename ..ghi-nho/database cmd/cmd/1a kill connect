@@ -1,0 +1,16 @@
+SELECT pg_terminate_backend(12345);
+
+
+
+
+
+
+
+--------------------------dong tat ca connection qua lau
+SELECT pg_terminate_backend(pid)
+FROM pg_stat_activity
+WHERE state = 'idle'
+  AND now() - state_change > interval '10 minutes';
+
+
+  

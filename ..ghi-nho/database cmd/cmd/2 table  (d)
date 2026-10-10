@@ -1,0 +1,7 @@
+\d	describe tất cả (table, sequence, view…)
+\dt	describe tables
+\ds	describe sequences
+\dv	describe views
+\d table_name	xem cấu trúc 1 bảng
+\d+ table_name	xem chi tiết hơn (size, index…)
+\d+ table_name	xem chi tiết hơn (size, index…)

@@ -1,0 +1,20 @@
+# Stop toàn bộ containers
+docker stop $(docker ps -aq) 2>/dev/null
+
+# Xóa toàn bộ containers
+docker rm -f $(docker ps -aq) 2>/dev/null
+
+# Xóa toàn bộ images
+docker rmi -f $(docker images -aq) 2>/dev/null
+
+# Xóa toàn bộ volumes
+docker volume rm $(docker volume ls -q) 2>/dev/null
+
+# Xóa toàn bộ custom networks
+docker network rm $(docker network ls -q | grep -v "bridge\|host\|none") 2>/dev/null
+
+# Xóa build cache
+docker builder prune -af
+
+# Dọn toàn bộ phần còn sót
+docker system prune -af --volumes

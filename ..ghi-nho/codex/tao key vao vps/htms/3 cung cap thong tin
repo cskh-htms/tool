@@ -1,0 +1,13 @@
+IP/hostname:103.252.122.174
+SSH user: user_one_htms
+SSH port:23266
+htms.vn
+------------------------------------
+project           service                   STATUS
+htms_web_server   htms_web_server           Up 30 minutes
+htms_web_server   htms_admin_server         Up 30 minutes
+htms_web_server   htms_chat_socket_server   Up 30 minutes
+htms_web_server   htms_api_server           Up 30 minutes
+htms_web_server   htms_postgres_server      Up 30 minutes (healthy)
+htms_web_server   htms_minio_server   
+hay kiem tra cac dich vu nay trang web cua toi khogn chat duoc 

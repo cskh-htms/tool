@@ -1,0 +1,42 @@
+---
+--
+-- 1. tat wal
+docker exec -it diem_sac_db_demo psql -U diem_sac_user_demo -d diem_sac_db_demo -c "ALTER SYSTEM SET archive_mode = off;"
+
+-- reset lai db
+docker restart diem_sac_db_demo
+
+--kiem tra tat chua
+docker exec -it diem_sac_db_demo psql -U diem_sac_user_demo -d diem_sac_db_demo -c "SHOW archive_mode;"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

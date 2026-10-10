@@ -1,0 +1,28 @@
+
+hay chinh cho docker email nan duoc google dns 
+
+
+
+--
+1.------------------------------------------
+sudo nano /etc/docker/daemon.json
+
+..................
+{
+  "dns": ["8.8.8.8", "1.1.1.1"]
+}
+..................
+
+
+--
+2.------------------------------------------
+sudo systemctl restart docker
+
+docker restart mailserver
+
+
+
+
+--
+3.------------------------------------------
+docker exec -it mailserver nslookup gmail.com

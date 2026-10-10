@@ -1,0 +1,26 @@
+
+----
+----
+docker exec -it diem_sac_db_demo psql -U diem_sac_user_demo -d diem_sac_db_demo -c "SHOW wal_level;"
+
+
+-- che do wal
+docker exec -it diem_sac_db_demo psql -U diem_sac_user_demo -d diem_sac_db_demo -c "SHOW archive_mode;"
+
+
+---
+--- xem wal co sinh file khong
+docker exec -it diem_sac_db_demo ls -lh /var/lib/postgresql/data/pg_wal | head
+
+
+--- wal co day di khong ai day di 
+docker exec -it diem_sac_db_demo psql -U diem_sac_user_demo -d diem_sac_db_demo -c "SHOW archive_command;"
+
+--- xem thong tin backup ( mc)
+docker exec -it diem_sac_db_demo pgbackrest --stanza=demo info
+
+
+--- wal co loi khong
+docker exec -it diem_sac_db_demo psql -U diem_sac_user_demo -d diem_sac_db_demo -c "SELECT * FROM pg_stat_archiver;"
+
+

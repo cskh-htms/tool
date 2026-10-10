@@ -1,0 +1,42 @@
+
+
+
+fe can set setting avariable
+----------------------------------
+
+set_config('audit.action_code', ...)
+set_config('audit.action_user_id', ...)
+set_config('audit.action_agent', ...)
+set_config('audit.action_business', ...)
+set_config('audit.action_part', ...)
+set_config('audit.ip_address', ...)
+set_config('audit.request_path', ...)
+
+
+triggers can  luu
+----------------------------------
+
+table_name
+record_id
+action_type: INSERT / UPDATE / DELETE
+action_code
+action_user_id
+action_agent
+action_business
+action_part
+action_actor  ( user database -- co the la root co the la user app - ko phai user fe)
+ip_address
+request_path
+old_data
+new_data
+created_at
+restore_of_action_code
+restore_reason
+
+
+
+
+
+
+
+

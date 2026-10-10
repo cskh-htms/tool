@@ -1,0 +1,26 @@
+services:
+  epacvn_web:
+    image: cskhhtms/epacvn_web:deploy_latest
+    restart: unless-stopped
+
+    ports:
+      - "127.0.0.1:3001:3000"
+
+    # 🔒 Security
+    read_only: true
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+
+    # 🔒 Fix cho read_only
+    tmpfs:
+      - /tmp
+
+    # 🔒 Resource limit (đúng cho compose)
+    cpus: 0.75
+    mem_limit: 512m
+
+networks:
+  epacvn_web_network:
+    driver: bridge

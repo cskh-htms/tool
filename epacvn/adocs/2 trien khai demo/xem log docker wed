@@ -1,0 +1,1 @@
+docker logs -f epacvn_web_demo

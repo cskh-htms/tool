@@ -1,0 +1,11 @@
+---
+pg_restore -U diem_sac_user -d diem_sac_db file.dump
+
+
+
+
+
+
+truong hop khong coa database cu no se tu xoa table khi import
+------
+pg_restore --clean --if-exists -U diem_sac_user -d diem_sac_db file.dump

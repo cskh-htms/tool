@@ -1,0 +1,15 @@
+
+----
+---- file cau hinh 
+sudo mkdir -p /root/.config/rclone
+sudo cp /home/user_one_htms/.config/rclone/rclone.conf /root/.config/rclone/rclone.conf
+sudo chmod 600 /root/.config/rclone/rclone.conf
+
+
+
+
+
+
+
+
+

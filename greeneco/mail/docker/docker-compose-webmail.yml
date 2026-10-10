@@ -1,0 +1,17 @@
+version: "3.8"
+
+services:
+  roundcube:
+    image: roundcube/roundcubemail:latest
+    container_name: roundcube
+    restart: always
+    ports:
+      - "8080:80"
+    environment:
+      - ROUNDCUBEMAIL_DEFAULT_HOST=ssl://mail.green-ecosystem.com
+      - ROUNDCUBEMAIL_DEFAULT_PORT=993
+      - ROUNDCUBEMAIL_SMTP_SERVER=tls://mail.green-ecosystem.com
+      - ROUNDCUBEMAIL_SMTP_PORT=587
+      - ROUNDCUBEMAIL_UPLOAD_MAX_FILESIZE=10M
+    volumes:
+      - ./data:/var/roundcube

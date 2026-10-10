@@ -1,0 +1,5 @@
+IP/hostname:36.50.233.231
+SSH user: user_one_htms
+SSH port:23266
+Mailserver đang dùng: images mailserver  ( container docker)
+Lỗi cụ thể: khong dang nhap duoc email khong gui duoc ko vao duoc email

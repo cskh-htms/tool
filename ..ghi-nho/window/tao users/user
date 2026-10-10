@@ -1,0 +1,25 @@
+
+--
+---
+-----------------------------------
+net user codex2 "" /add
+
+
+-------------------------------------
+net localgroup Users codex2 /add
+
+
+
+-------------------------------------
+net localgroup Administrators codex2 /add
+
+
+
+
+
+
+
+
+
+
+

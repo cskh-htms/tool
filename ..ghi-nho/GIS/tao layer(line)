@@ -1,0 +1,38 @@
+Menu Layer → Create Layer → New Shapefile Layer
+Cấu hình:
+File name: đặt tên vd duong_bien_du_an.shp
+Geometry type: chọn Line (nếu muốn đường) hoặc Polygon (nếu muốn vùng khép kín)
+CRS: chọn đúng hệ toạ độ — nên dùng EPSG:4326 (WGS84) hoặc VN2000
+OK
+
+--------------------------------------------------------
+
+Bước 1 — Chọn đúng layer
+Click vào duong-bien-du-an-so-1 trong panel Layers cho nó được highlight xanh ✅
+
+Bước 2 — Bật chế độ Edit
+Click biểu tượng bút chì vàng 🖊️ trên toolbar (Toggle Editing)
+
+Khi bật thành công → layer sẽ có biểu tượng bút chì xuất hiện cạnh tên layer trong panel
+
+Bước 3 — Chọn công cụ vẽ đường
+Trên toolbar tìm biểu tượng "Add Line Feature" (đường gấp khúc có dấu +)
+
+Hoặc nhấn phím tắt A sau khi bật editing
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

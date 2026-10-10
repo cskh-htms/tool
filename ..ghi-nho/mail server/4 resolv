@@ -1,0 +1,86 @@
+
+--
+hay chỉnh cho dns la google 8.8.8.8
+
+
+
+--
+1.------------------------------------------
+sudo nano /etc/systemd/resolved.conf
+
+..................
+[Resolve]
+DNS=8.8.8.8 1.1.1.1
+FallbackDNS=
+DNSStubListener=no
+..................
+
+
+--
+2.------------------------------------------
+sudo rm /etc/resolv.conf
+
+
+--
+3.------------------------------------------
+echo -e "nameserver 8.8.8.8\nnameserver 1.1.1.1" | sudo tee /etc/resolv.conf
+
+
+
+--
+4.------------------------------------------
+sudo systemctl restart systemd-resolved
+
+dig google.com
+
+
+
+
+
+
+---
+---
+--- 
+sudo nano /etc/netplan/*.yaml
+
+nameservers:
+  addresses: [8.8.8.8, 1.1.1.1]
+
+sudo netplan apply
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--
+-- test
+--  chay lenh nay neu no ra 8.8.8.8   la ok ma no ra SERVER: 127.0.0.53#53(127.0.0.53) (UDP)  la fail
+------------------------------------------------------------------------------------------------------
+dig google.com
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

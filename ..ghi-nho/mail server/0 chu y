@@ -1,0 +1,14 @@
+--
+--
+--
+--
+--
+1.--------------------------------------------------------- 
+docker exec -it mailserver nslookup gmail.com
+    luon bao dam container mailserver goi duoc gmail
+
+
+
+2. ---------------------------------------------------------
+luon bao dam dung dns cua google 
+sudo nano /etc/systemd/resolved.conf

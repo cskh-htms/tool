@@ -1,0 +1,23 @@
+-- tao index trgm
+CREATE EXTENSION IF NOT EXISTS pg_trgm;
+CREATE EXTENSION IF NOT EXISTS unaccent;
+
+
+CREATE OR REPLACE FUNCTION immutable_unaccent(text)
+RETURNS text
+LANGUAGE sql
+IMMUTABLE
+AS $$
+  SELECT unaccent($1)
+$$;
+
+
+CREATE INDEX IF NOT EXISTS idx_matbang_search_all
+ON mat_bang
+USING gin (
+  immutable_unaccent(
+    coalesce(chu_mat_bang, '') || ' ' ||
+    coalesce(ma_mat_bang, '') || ' ' ||
+    coalesce(dien_thoai_lien_he, '')
+  ) gin_trgm_ops
+);
