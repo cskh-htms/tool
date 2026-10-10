@@ -234,6 +234,7 @@ alias llagl='getent group'
 # dist --------------------------------------------
 alias lladh='alias | grep "^alias llad"'
 alias lladl='df -h --total | grep total'
+alias lladf='df -h --total | grep total'
 alias llada='sudo du -h --max-depth=1 / | sort -hr'
 alias lladb='sudo du -h --max-depth=1 /var | sort -hr'
 
