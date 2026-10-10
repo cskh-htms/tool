@@ -383,28 +383,13 @@ alias lladkdfv='_lladkdfv'
 #
 #
 # docker volume--------------------------------------------
-alias lladkvpa='_llakey them'docker volume prune --all
+alias lladkvpa='_llakey them'docker volume prune --all'
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+#
+#
+# -----------------------------------------
 _llakey() (
     action="$1"
     dir="$HOME/.ssh"
