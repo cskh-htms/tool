@@ -280,6 +280,7 @@ alias lladkdfv='docker system df -v'
 alias lladkp='docker system prune'
 alias lladkpa='docker system prune -a'
 alias lladkpaf='docker system prune -af'
+
 alias lladksta='docker ps -q | xargs -r docker stop'alias lladkdfi='docker image ls -aq --no-trunc \
   | sort -u \
   | xargs -r docker image inspect --format "{{.Size}}{{\"\t\"}}{{.Id}}{{\"\t\"}}{{join .RepoTags \",\"}}" \
@@ -377,6 +378,28 @@ for index in sorted(sizes, key=sizes.get, reverse=True):
 PY
 }
 alias lladkdfv='_lladkdfv'
+
+#
+#
+#
+# docker volume--------------------------------------------
+alias lladkvpa='_llakey them'docker volume prune --all
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
