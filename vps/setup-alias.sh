@@ -383,7 +383,7 @@ alias lladkdfv='_lladkdfv'
 #
 #
 # docker volume--------------------------------------------
-alias lladkvpa='_llakey them'docker volume prune --all'
+alias lladkvpa='docker volume prune --all'
 
 
 
