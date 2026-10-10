@@ -318,7 +318,65 @@ BEGIN {
 # docker images--------------------------------------------
 alias lladkimpaf='docker image prune -a -f'
 
+_lladkdfv() {
+python3 - <<'PY'
+import json
+import subprocess
 
+def docker(*args):
+    return subprocess.check_output(["docker", *args], text=True).strip()
+
+ids = docker("ps", "-q").split()
+if not ids:
+    print("Không có container đang chạy.")
+    raise SystemExit
+
+volumes = {}
+for container in json.loads(docker("inspect", *ids)):
+    labels = container["Config"].get("Labels") or {}
+    project = labels.get("com.docker.compose.project", "-")
+    service = labels.get(
+        "com.docker.compose.service", container["Name"].lstrip("/")
+    )
+    for mount in container.get("Mounts", []):
+        if mount["Type"] == "volume":
+            volumes.setdefault(mount["Name"], set()).add((project, service))
+
+if not volumes:
+    print("Không có volume gắn với container đang chạy.")
+    raise SystemExit
+
+names = sorted(volumes)
+command = ["docker", "run", "--rm", "--network", "none"]
+for index, name in enumerate(names):
+    command += [
+        "--mount",
+        f"type=volume,src={name},dst=/volumes/{index},readonly"
+    ]
+command += [
+    "alpine:3.22", "sh", "-c",
+    'for d in /volumes/*; do du -sk "$d" || exit; done'
+]
+
+sizes = {}
+for line in subprocess.check_output(command, text=True).splitlines():
+    size, path = line.split(maxsplit=1)
+    sizes[int(path.rsplit("/", 1)[1])] = int(size) * 1024
+
+def human(size):
+    for unit in ["B", "KiB", "MiB", "GiB", "TiB"]:
+        if size < 1024 or unit == "TiB":
+            return f"{size:.2f} {unit}"
+        size /= 1024
+
+print(f"{'TÊN VOLUME':<55} {'DUNG LƯỢNG':>13}  {'DỰ ÁN':<28} SERVICE")
+for index in sorted(sizes, key=sizes.get, reverse=True):
+    name = names[index]
+    for project, service in sorted(volumes[name]):
+        print(f"{name:<55} {human(sizes[index]):>13}  {project:<28} {service}")
+PY
+}
+alias lladkdfv='_lladkdfv'
 
 
 
