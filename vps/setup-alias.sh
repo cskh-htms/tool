@@ -76,9 +76,12 @@ alias llacron='crontab -e'
 alias llacrol='tail -n 50 -f /home/user_one_htms/logs/cron.log'
 
 
-
-
-
+#
+# test vps ---------------------------------------------------
+alias llavpsc='sudo bash "$HOME/tool/vps/test-cpu.sh"'
+alias llavpsr='sudo bash "$HOME/tool/vps/test-ram.sh"'
+alias llavpsn='sudo bash "$HOME/tool/vps/test-mang.sh"'
+alias llavpsd='sudo bash "$HOME/tool/vps/test-io.sh"'
 #
 #
 #
