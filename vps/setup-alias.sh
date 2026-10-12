@@ -288,7 +288,10 @@ alias lladkpaf='docker system prune -af'
 alias lladkbpa='docker builder prune --all --force'
 alias lladkbxpa='docker builder prune --all --force'
 
-alias lladksta='docker ps -q | xargs -r docker stop'alias lladkdfi='docker image ls -aq --no-trunc \
+alias lladksta='docker ps -q | xargs -r docker stop'
+alias lladkrsa='docker ps -aq | xargs -r docker start'
+
+alias lladkdfi='docker image ls -aq --no-trunc \
   | sort -u \
   | xargs -r docker image inspect --format "{{.Size}}{{\"\t\"}}{{.Id}}{{\"\t\"}}{{join .RepoTags \",\"}}" \
   | sort -nr \
@@ -320,7 +323,6 @@ BEGIN {
   if ($3 == "")
     printf "%-32s %10s  %-12s  %-18s\n", "<khong co ten>", size, id, "<none>"
 }'\'''
-
 
 #
 # docker images--------------------------------------------
