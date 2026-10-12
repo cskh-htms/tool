@@ -16,7 +16,7 @@ llah() {
 #
 #  llac htms_web
 # Xoa alias cu trung ten truoc khi khai bao cac ham.
-unalias llac llag lla 2>/dev/null || true
+# unalias llac llag lla 2>/dev/null || true
 
 llac() {
   local repo="${1:?Cách dùng: llac ten-repository}"
@@ -50,49 +50,3 @@ lla() {
     (cd -- "$repo_root" && bash "$repo_root/scripts/git-push.sh" "$@")
 }
 
-#
-# docker --------------------------------------------
-alias lladkh='alias | grep "^alias lladk"'
-alias lladkc='docker ps -a --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}"'
-alias lladks='docker ps --format "table {{.Label \"com.docker.compose.project\"}}\t{{.Label \"com.docker.compose.service\"}}\t{{.Status}}"'
-alias lladkdf='docker system df'
-alias lladkdfv='docker system df -v'
-alias lladkp='docker system prune'
-alias lladkpa='docker system prune -a'
-alias lladkpaf='docker system prune -af'
-alias lladksta='docker ps -q | xargs -r docker stop'
-
-
-
-alias lladkdfi='docker image ls -aq --no-trunc \
-  | sort -u \
-  | xargs -r docker image inspect --format "{{.Size}}{{\"\t\"}}{{.Id}}{{\"\t\"}}{{join .RepoTags \",\"}}" \
-  | sort -nr \
-  | awk -F "\t" '\''
-function shorten(text, limit) {
-  return length(text) > limit ? substr(text, 1, limit - 3) "..." : text
-}
-BEGIN {
-  printf "%-32s %10s  %-12s  %-18s\n", "TEN IMAGE", "DUNG LUONG", "IMAGE ID", "TAG"
-}
-{
-  size = ($1 >= 1000000000) \
-    ? sprintf("%.2f GB", $1 / 1000000000) \
-    : sprintf("%.1f MB", $1 / 1000000)
-
-  id = $2
-  sub(/^sha256:/, "", id)
-  id = substr(id, 1, 12)
-
-  n = split($3, refs, ",")
-  for (i = 1; i <= n; i++) {
-    ref = refs[i]
-    if (ref == "" || ref ~ /@sha256:/) continue
-    match(ref, /:[^:]*$/)
-    name = substr(ref, 1, RSTART - 1)
-    tag = substr(ref, RSTART + 1)
-    printf "%-32s %10s  %-12s  %-18s\n", shorten(name, 32), size, id, shorten(tag, 18)
-  }
-  if ($3 == "")
-    printf "%-32s %10s  %-12s  %-18s\n", "<khong co ten>", size, id, "<none>"
-}'\'''

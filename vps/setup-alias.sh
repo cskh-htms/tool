@@ -275,7 +275,7 @@ alias llamlo='docker logs -f mailserver'
 
 
 #
-# docker --------------------------------------------
+# docker: --------------------------------------------
 alias lladkh='alias | grep "^alias lladk"'
 alias lladkc='docker ps -a --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}"'
 alias lladks='docker ps --format "table {{.Label \"com.docker.compose.project\"}}\t{{.Label \"com.docker.compose.service\"}}\t{{.Status}}"'
@@ -284,6 +284,9 @@ alias lladkdfv='docker system df -v'
 alias lladkp='docker system prune'
 alias lladkpa='docker system prune -a'
 alias lladkpaf='docker system prune -af'
+
+alias lladkbpa='docker builder prune --all --force'
+alias lladkbxpa='docker builder prune --all --force'
 
 alias lladksta='docker ps -q | xargs -r docker stop'alias lladkdfi='docker image ls -aq --no-trunc \
   | sort -u \
