@@ -40,7 +40,7 @@ alias llaep='rm -rf ./tool-epacvn && git clone git@github.com:cskh-htms/tool-epa
 alias llatr='rm -rf ./tool-trial && git clone git@github.com:cskh-htms/tool-trial.git && find ./tool-trial -type f -name "*.sh" -exec chmod +x {} \;'
 alias llast='rm -rf ./tool-store && git clone git@github.com:cskh-htms/tool-store.git && find ./tool-store -type f -name "*.sh" -exec chmod +x {} \;'
 alias llatpl='rm -rf ./tool-template && git clone git@github.com:cskh-htms/tool-template.git && find ./tool-template -type f -name "*.sh" -exec chmod +x {} \;'
-
+alias llamt='rm -rf ./tool-maytinh && git clone git@github.com:cskh-htms/tool-maytinh.git && find ./tool-maytinh -type f -name "*.sh" -exec chmod +x {} \;'
 
 
 
