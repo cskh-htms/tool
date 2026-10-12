@@ -39,7 +39,7 @@ alias llasks='rm -rf ./tool-skins && git clone git@github.com:cskh-htms/tool-ski
 alias llaep='rm -rf ./tool-epacvn && git clone git@github.com:cskh-htms/tool-epacvn.git && find ./tool-epacvn -type f -name "*.sh" -exec chmod +x {} \;'
 alias llatr='rm -rf ./tool-trial && git clone git@github.com:cskh-htms/tool-trial.git && find ./tool-trial -type f -name "*.sh" -exec chmod +x {} \;'
 alias llast='rm -rf ./tool-store && git clone git@github.com:cskh-htms/tool-store.git && find ./tool-store -type f -name "*.sh" -exec chmod +x {} \;'
-alias llatp='rm -rf ./tool-template && git clone git@github.com:cskh-htms/tool-template.git && find ./tool-template -type f -name "*.sh" -exec chmod +x {} \;'
+alias llatpt='rm -rf ./tool-template && git clone git@github.com:cskh-htms/tool-template.git && find ./tool-template -type f -name "*.sh" -exec chmod +x {} \;'
 
 
 
