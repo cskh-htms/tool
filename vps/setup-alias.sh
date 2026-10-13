@@ -483,6 +483,20 @@ alias llakd='_llakey xoa'
 
 
 
+
+
+
+#
+#
+# tool-daihung
+alias lladhp='docker pull cskhhtms/daihung_web:deploy_latest'
+alias lladhd='docker compose -p user_one_htms_daihung -f "$HOME/docker-compose-daihung-server.yml" up -d --no-deps web_daihung'
+alias lladhsta='docker compose -p user_one_htms_daihung -f "$HOME/docker-compose-daihung-server.yml" up -d --no-deps web_daihung'
+alias lladhdw='docker compose -p user_one_htms_daihung -f "$HOME/docker-compose-daihung-server.yml" down'
+alias lladhdwv='docker compose -p user_one_htms_daihung -f "$HOME/docker-compose-daihung-server.yml" down -v'
+
+
+
 EOF
 
 echo "✅ Đã ghi đè alias vào $ALIASES_FILE"

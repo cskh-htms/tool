@@ -14,7 +14,7 @@
         "-d",
         "Ubuntu-24.04",
         "--cd",
-        "/home/vanluc/tool-diem-sac",
+        "/home/vanluc/tool",
         "--exec",
         "bash",
         "--login"
