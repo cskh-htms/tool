@@ -498,7 +498,7 @@ alias lladhadlsto='sudo -u ubuntu -H bash /home/ubuntu/tool-daihung/scripts/disa
 alias lladhadlsta='sudo -u ubuntu -H bash /home/ubuntu/tool-daihung/scripts/enable-auditlog.sh'
 
 alias lladhbktele='sudo -u ubuntu -H bash /home/ubuntu/scripts/daihung/backup-database-to-telegram.sh'
-alias lladhbkclfl='sudo -u ubuntu -H bash /home/ubuntu/scripts/daihung/backup-uploads-to-cloudfly.s'
+alias lladhbkclfl='sudo -u ubuntu -H bash /home/ubuntu/scripts/daihung/backup-uploads-to-cloudfly.sh'
 
 
 
