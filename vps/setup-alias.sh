@@ -557,9 +557,18 @@ alias lladsbkclfl='sudo -u ubuntu -H bash /home/ubuntu/scripts/s3-to-cloudfly-ba
 
 
 
+#
+#
+# tool-tpdn:
+#
+alias llatpp='docker pull cskhhtms/tpdn_web:deploy_latest'
+alias llatpd='docker compose --env-file "$HOME/docker/tpdn.htms.vn/.env.server" -p tpdn_web_server -f "$HOME/docker/tpdn.htms.vn/docker-compose-server.yml" up -d --no-deps tpdn_web'
+alias llatpsta='docker compose --env-file "$HOME/docker/tpdn.htms.vn/.env.server" -p tpdn_web_server -f "$HOME/docker/tpdn.htms.vn/docker-compose-server.yml" up -d --no-deps tpdn_web'
+alias llatpdw='docker compose --env-file "$HOME/docker/tpdn.htms.vn/.env.server" -p tpdn_web_server -f "$HOME/docker/tpdn.htms.vn/docker-compose-server.yml" down'
+alias llatpdwv='docker compose --env-file "$HOME/docker/tpdn.htms.vn/.env.server" -p tpdn_web_server -f "$HOME/docker/tpdn.htms.vn/docker-compose-server.yml" down -v'
 
-
-
+alias llatpadlsto='sudo -u ubuntu -H bash /home/ubuntu/tool-tpdn/scripts/disable-auditlog.sh'
+alias llatpadlsta='sudo -u ubuntu -H bash /home/ubuntu/tool-tpdn/scripts/enable-auditlog.sh'
 
 
 #
