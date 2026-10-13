@@ -497,6 +497,11 @@ alias lladhdwv='docker compose -p user_one_htms_daihung -f "$HOME/docker-compose
 alias lladhadlsto='sudo -u ubuntu -H bash /home/ubuntu/tool-daihung/scripts/disable-auditlog.sh'
 alias lladhadlsta='sudo -u ubuntu -H bash /home/ubuntu/tool-daihung/scripts/enable-auditlog.sh'
 
+alias lladhbktele='sudo -u ubuntu -H bash /home/ubuntu/scripts/daihung/backup-database-to-telegram.sh'
+alias lladhbkclfl='sudo -u ubuntu -H bash /home/ubuntu/scripts/daihung/backup-uploads-to-cloudfly.s'
+
+
+
 
 #
 # tool-minhdang
@@ -509,6 +514,10 @@ alias llamddwv='docker compose -p user_one_htms_minhdang -f "$HOME/docker-compos
 
 alias llamdadlsto='sudo -u ubuntu -H bash /home/ubuntu/tool-minhdang/scripts/disable-auditlog.sh'
 alias llamdadlsta='sudo -u ubuntu -H bash /home/ubuntu/tool-minhdang/scripts/enable-auditlog.sh'
+
+alias llamdbktele='sudo -u ubuntu -H bash /home/ubuntu/scripts/minhdang/backup-database-to-telegram.sh'
+alias llamdbkclfl='sudo -u ubuntu -H bash /home/ubuntu/scripts/minhdang/backup-uploads-to-cloudfly.sh'
+
 
 #
 # tool-t3s
@@ -523,6 +532,8 @@ alias llat3adlsto='sudo -u ubuntu -H bash /home/ubuntu/tool-t3s/scripts/disable-
 alias llat3adlsta='sudo -u ubuntu -H bash /home/ubuntu/tool-t3s/scripts/enable-auditlog.sh'
 
 
+alias llat3bktele='sudo -u ubuntu -H bash /home/ubuntu/scripts/t3s/backup-database-to-telegram.sh'
+alias llat3bkclfl='sudo -u ubuntu -H bash /home/ubuntu/scripts/t3s/backup-uploads-to-cloudfly.sh'
 
 #
 #
