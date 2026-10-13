@@ -570,6 +570,10 @@ alias llatpdwv='docker compose --env-file "$HOME/docker/tpdn.htms.vn/.env.server
 alias llatpadlsto='sudo -u ubuntu -H bash /home/ubuntu/tool-tpdn/scripts/disable-auditlog.sh'
 alias llatpadlsta='sudo -u ubuntu -H bash /home/ubuntu/tool-tpdn/scripts/enable-auditlog.sh'
 
+alias llatpbktele='sudo -u ubuntu -H bash /home/ubuntu/scripts/tpdn.htms.vn/backup-database-to-telegram.sh'
+alias llatpbkclfl='sudo -u ubuntu -H bash /home/ubuntu/scripts/tpdn.htms.vn/backup-uploads-to-cloudfly.sh --run'
+
+
 
 #
 #
