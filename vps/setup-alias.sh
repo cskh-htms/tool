@@ -28,7 +28,7 @@ alias llatt='rm -rf ./tool-thoitrang && git clone git@github.com:cskh-htms/tool-
 alias lladm='rm -rf ./tool-demo && git clone git@github.com:cskh-htms/tool-demo.git && find ./tool-demo -type f -name "*.sh" -exec chmod +x {} \;'
 alias llacf='rm -rf ./tool-cafe && git clone git@github.com:cskh-htms/tool-cafe.git && find ./tool-cafe -type f -name "*.sh" -exec chmod +x {} \;'
 alias llatp='rm -rf ./tool-tpdn && git clone git@github.com:cskh-htms/tool-tpdn.git && find ./tool-tpdn -type f -name "*.sh" -exec chmod +x {} \;'
-alias lladhg='rm -rf ./tool-daihung && git clone git@github.com:cskh-htms/tool-daihung.git && find ./tool-daihung -type f -name "*.sh" -exec chmod +x {} \;'
+alias lladh='rm -rf ./tool-daihung && git clone git@github.com:cskh-htms/tool-daihung.git && find ./tool-daihung -type f -name "*.sh" -exec chmod +x {} \;'
 alias llamd='rm -rf ./tool-minhdang && git clone git@github.com:cskh-htms/tool-minhdang.git && find ./tool-minhdang -type f -name "*.sh" -exec chmod +x {} \;'
 alias llapdf='rm -rf ./tool-pdf && git clone git@github.com:cskh-htms/tool-pdf.git && find ./tool-pdf -type f -name "*.sh" -exec chmod +x {} \;'
 alias llat3='rm -rf ./tool-t3s && git clone git@github.com:cskh-htms/tool-t3s.git && find ./tool-t3s -type f -name "*.sh" -exec chmod +x {} \;'
@@ -235,7 +235,6 @@ alias llagl='getent group'
 
 #
 # dist --------------------------------------------
-alias lladh='alias | grep "^alias llad"'
 alias lladl='df -h --total | grep total'
 alias lladf='df -h --total | grep total'
 alias llada='sudo du -h --max-depth=1 / | sort -hr'
@@ -488,7 +487,7 @@ alias llakd='_llakey xoa'
 
 #
 #
-# tool-daihung
+# tool-daihung:
 alias lladhp='docker pull cskhhtms/daihung_web:deploy_latest'
 alias lladhd='docker compose -p user_one_htms_daihung -f "$HOME/docker-compose-daihung-server.yml" up -d --no-deps web_daihung'
 alias lladhsta='docker compose -p user_one_htms_daihung -f "$HOME/docker-compose-daihung-server.yml" up -d --no-deps web_daihung'
@@ -499,11 +498,29 @@ alias lladhadlsto='sudo -u ubuntu -H bash /home/ubuntu/tool-daihung/scripts/disa
 alias lladhadlsta='sudo -u ubuntu -H bash /home/ubuntu/tool-daihung/scripts/enable-auditlog.sh'
 
 
+#
+# tool-minhdang
+#
+alias llamdp='docker pull cskhhtms/minhdang_web:deploy_latest'
+alias llamdd='docker compose -p user_one_htms_minhdang -f "$HOME/docker-compose-minhdang-server.yml" up -d --no-deps web_minhdang'
+alias llamdsta='docker compose -p user_one_htms_minhdang -f "$HOME/docker-compose-minhdang-server.yml" up -d --no-deps web_minhdang'
+alias llamddw='docker compose -p user_one_htms_minhdang -f "$HOME/docker-compose-minhdang-server.yml" down'
+alias llamddwv='docker compose -p user_one_htms_minhdang -f "$HOME/docker-compose-minhdang-server.yml" down -v'
 
+alias llamdadlsto='sudo -u ubuntu -H bash /home/ubuntu/tool-minhdang/scripts/disable-auditlog.sh'
+alias llamdadlsta='sudo -u ubuntu -H bash /home/ubuntu/tool-minhdang/scripts/enable-auditlog.sh'
 
+#
+# tool-t3s
+#
+alias llat3p='docker pull cskhhtms/minhdang_web:deploy_latest'
+alias llat3d='docker compose -p ubuntu_t3s -f "$HOME/docker-compose-t3s-server.yml" up -d --no-deps web_t3s'
+alias llat3sta='docker compose -p ubuntu_t3s -f "$HOME/docker-compose-t3s-server.yml" up -d --no-deps web_t3s'
+alias llat3dw='docker compose -p ubuntu_t3s -f "$HOME/docker-compose-t3s-server.yml" down'
+alias llat3dwv='docker compose -p ubuntu_t3s -f "$HOME/docker-compose-t3s-server.yml" down -v'
 
-
-
+alias llat3adlsto='sudo -u ubuntu -H bash /home/ubuntu/tool-t3s/scripts/disable-auditlog.sh'
+alias llat3adlsta='sudo -u ubuntu -H bash /home/ubuntu/tool-t3s/scripts/enable-auditlog.sh'
 
 
 
