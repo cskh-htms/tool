@@ -495,8 +495,21 @@ alias lladhsta='docker compose -p user_one_htms_daihung -f "$HOME/docker-compose
 alias lladhdw='docker compose -p user_one_htms_daihung -f "$HOME/docker-compose-daihung-server.yml" down'
 alias lladhdwv='docker compose -p user_one_htms_daihung -f "$HOME/docker-compose-daihung-server.yml" down -v'
 
+alias lladhadlsto='sudo -u ubuntu -H bash /home/ubuntu/tool-daihung/scripts/disable-auditlog.sh'
+alias lladhadlsta='sudo -u ubuntu -H bash /home/ubuntu/tool-daihung/scripts/enable-auditlog.sh'
 
 
+
+
+
+
+
+
+
+
+#
+#
+#
 EOF
 
 echo "✅ Đã ghi đè alias vào $ALIASES_FILE"
