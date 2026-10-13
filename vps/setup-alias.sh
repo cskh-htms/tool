@@ -503,7 +503,7 @@ alias lladhbkclfl='sudo -u ubuntu -H bash /home/ubuntu/scripts/daihung/backup-up
 
 
 #
-# tool-minhdang
+# tool-minhdang:
 #
 alias llamdp='docker pull cskhhtms/minhdang_web:deploy_latest'
 alias llamdd='docker compose -p user_one_htms_minhdang -f "$HOME/docker-compose-minhdang-server.yml" up -d --no-deps web_minhdang'
@@ -519,7 +519,7 @@ alias llamdbkclfl='sudo -u ubuntu -H bash /home/ubuntu/scripts/minhdang/backup-u
 
 
 #
-# tool-t3s
+# tool-t3s:
 #
 alias llat3p='docker pull cskhhtms/minhdang_web:deploy_latest'
 alias llat3d='docker compose -p ubuntu_t3s -f "$HOME/docker-compose-t3s-server.yml" up -d --no-deps web_t3s'
@@ -533,6 +533,34 @@ alias llat3adlsta='sudo -u ubuntu -H bash /home/ubuntu/tool-t3s/scripts/enable-a
 
 alias llat3bktele='sudo -u ubuntu -H bash /home/ubuntu/scripts/t3s/backup-database-to-telegram.sh'
 alias llat3bkclfl='sudo -u ubuntu -H bash /home/ubuntu/scripts/t3s/backup-uploads-to-cloudfly.sh'
+
+
+
+
+#
+#
+# tool-diem-sac
+#
+alias lladsp='docker pull cskhhtms/diem_sac_web:deploy_latest'
+alias lladsd='docker compose -p user_one_htms -f "$HOME/docker-compose.yml" up -d --no-deps web'
+alias lladssta='docker compose -p user_one_htms -f "$HOME/docker-compose.yml" up -d --no-deps web'
+alias lladsdw='docker compose -p user_one_htms -f "$HOME/docker-compose.yml" down'
+alias lladsdwv='docker compose -p user_one_htms -f "$HOME/docker-compose.yml" down -v'
+
+alias lladsadlsto='sudo -u ubuntu -H bash /home/ubuntu/tool-diem-sac/scripts/disable-auditlog.sh'
+alias lladsadlsta='sudo -u ubuntu -H bash /home/ubuntu/tool-diem-sac/scripts/enable-auditlog.sh'
+
+alias lladsbktele='sudo -u ubuntu -H bash /home/ubuntu/scripts/diem-sac/backup-database-to-telegram.sh'
+alias lladsbkclfl='sudo -u ubuntu -H bash /home/ubuntu/scripts/s3-to-cloudfly-backup.sh --run'
+
+
+
+
+
+
+
+
+
 
 #
 #
