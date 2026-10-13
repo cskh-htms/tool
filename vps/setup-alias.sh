@@ -502,7 +502,6 @@ alias lladhbkclfl='sudo -u ubuntu -H bash /home/ubuntu/scripts/daihung/backup-up
 
 
 
-
 #
 # tool-minhdang
 #
