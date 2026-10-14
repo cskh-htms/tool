@@ -501,6 +501,14 @@ alias lladhbktele='sudo -u ubuntu -H bash /home/ubuntu/scripts/daihung/backup-da
 alias lladhbkclfl='sudo -u ubuntu -H bash /home/ubuntu/scripts/daihung/backup-uploads-to-cloudfly.sh'
 
 
+alias lladhste='COMPOSE_FILE="${COMPOSE_FILE:-$HOME/docker-compose-daihung-server.yml}" DB_SERVICE="${DB_SERVICE:-db_daihung}" DB_CONTAINER="${DB_CONTAINER:-diem_sac_db_daihung}" DB_NAME="${DB_NAME:-diem_sac_db_daihung}" DB_USER="${DB_USER:-diem_sac_user_daihung}" ~/tool-daihung/scripts/daihung/export-structure-daihung-server.sh'
+alias lladhdte='COMPOSE_FILE="${COMPOSE_FILE:-$HOME/docker-compose-daihung-server.yml}" DB_SERVICE="${DB_SERVICE:-db_daihung}" DB_CONTAINER="${DB_CONTAINER:-diem_sac_db_daihung}" DB_NAME="${DB_NAME:-diem_sac_db_daihung}" DB_USER="${DB_USER:-diem_sac_user_daihung}" ~/tool-daihung/scripts/daihung/export-datas-daihung-server.sh'
+
+
+
+
+
+
 
 #
 # tool-minhdang:
@@ -516,6 +524,8 @@ alias llamdadlsta='sudo -u ubuntu -H bash /home/ubuntu/tool-minhdang/scripts/ena
 
 alias llamdbktele='sudo -u ubuntu -H bash /home/ubuntu/scripts/minhdang/backup-database-to-telegram.sh'
 alias llamdbkclfl='sudo -u ubuntu -H bash /home/ubuntu/scripts/minhdang/backup-uploads-to-cloudfly.sh'
+alias llmdste='COMPOSE_FILE="${COMPOSE_FILE:-$HOME/docker-compose-minhdang-server.yml}" DB_SERVICE="${DB_SERVICE:-db_minhdang}" DB_CONTAINER="${DB_CONTAINER:-diem_sac_db_minhdang}" DB_NAME="${DB_NAME:-diem_sac_db_minhdang}" DB_USER="${DB_USER:-diem_sac_user_minhdang}" LOCAL_FILE="${LOCAL_FILE:-$HOME/datas/structure-md.sql}" ~/tool-daihung/scripts/daihung/export-structure-daihung-server.sh'
+alias llmddte='COMPOSE_FILE="${COMPOSE_FILE:-$HOME/docker-compose-minhdang-server.yml}" DB_SERVICE="${DB_SERVICE:-db_minhdang}" DB_CONTAINER="${DB_CONTAINER:-diem_sac_db_minhdang}" DB_NAME="${DB_NAME:-diem_sac_db_minhdang}" DB_USER="${DB_USER:-diem_sac_user_minhdang}" LOCAL_FILE="${LOCAL_FILE:-$HOME/datas/data-md.sql}" ~/tool-daihung/scripts/daihung/export-datas-daihung-server.sh'
 
 
 #
@@ -533,6 +543,13 @@ alias llat3adlsta='sudo -u ubuntu -H bash /home/ubuntu/tool-t3s/scripts/enable-a
 
 alias llat3bktele='sudo -u ubuntu -H bash /home/ubuntu/scripts/t3s/backup-database-to-telegram.sh'
 alias llat3bkclfl='sudo -u ubuntu -H bash /home/ubuntu/scripts/t3s/backup-uploads-to-cloudfly.sh'
+
+alias llt3ste='COMPOSE_FILE="${COMPOSE_FILE:-$HOME/docker-compose-t3s-server.yml}" DB_SERVICE="${DB_SERVICE:-db_t3s}" DB_CONTAINER="${DB_CONTAINER:-xanhlamdong_db_t3s}" DB_NAME="${DB_NAME:-xanhlamdong_db_t3s}" DB_USER="${DB_USER:-xanhlamdong_user_t3s}" LOCAL_FILE="${LOCAL_FILE:-$HOME/datas/structure-t3.sql}" ~/tool-daihung/scripts/daihung/export-structure-daihung-server.sh'
+alias llt3dte='COMPOSE_FILE="${COMPOSE_FILE:-$HOME/docker-compose-t3s-server.yml}" DB_SERVICE="${DB_SERVICE:-db_t3s}" DB_CONTAINER="${DB_CONTAINER:-xanhlamdong_db_t3s}" DB_NAME="${DB_NAME:-xanhlamdong_db_t3s}" DB_USER="${DB_USER:-xanhlamdong_user_t3s}" LOCAL_FILE="${LOCAL_FILE:-$HOME/datas/data-t3.sql}" ~/tool-daihung/scripts/daihung/export-datas-daihung-server.sh'
+
+
+
+
 
 
 
