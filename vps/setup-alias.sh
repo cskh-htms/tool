@@ -45,6 +45,25 @@ alias llamt='rm -rf ./tool-maytinh && git clone git@github.com:cskh-htms/tool-ma
 
 
 
+
+
+#
+#
+#
+# setup vps
+alias llastus='./tool/vps/create_user_one_htms.sh'
+alias llastbm='./tool/vps/setup-security.sh'
+alias llastat='./tool/vps/install-all-tools.sh'
+alias llastdk='./tool/vps/install-docker.sh'
+alias llastng='./tool/vps/install-nginx.sh'
+
+alias llastsw='sudo fallocate -l 2G /swapfile; sudo chmod 600 /swapfile; sudo mkswap /swapfile; sudo swapon /swapfile; echo "/swapfile none swap sw 0 0" | sudo tee -a /etc/fstab; free -h'
+
+
+
+
+
+
 # ------------------------
 # git copy ca hinh moi khi thay doi thme hoat bot repo 
 # khi chay no thi se reload lai copy len vps va reload lai
