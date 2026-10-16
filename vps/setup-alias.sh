@@ -11,6 +11,11 @@ cat > "$ALIASES_FILE" <<'EOF'
 # git  -----------------------------------------
 alias llat='sudo chmod -R +x ./tool*'
 alias lla='rm -rf ./tool && git clone git@github.com:cskh-htms/tool.git && find ./tool -type f -name "*.sh" -exec chmod +x {} \;'
+
+alias llaa='rm -rf ./tool && git clone https://github.com/cskh-htms/tool.git && find ./tool -type f -name "*.sh" -exec chmod +x {} \;'
+
+
+
 alias llaht='rm -rf ./tool-htms && git clone git@github.com:cskh-htms/tool-htms.git && find ./tool-htms -type f -name "*.sh" -exec chmod +x {} \;'
 alias llads='rm -rf ./tool-diem-sac && git clone git@github.com:cskh-htms/tool-diem-sac.git && find ./tool-diem-sac -type f -name "*.sh" -exec chmod +x {} \;'
 alias llaxd='rm -rf ./tool-xanh-demo && git clone git@github.com:cskh-htms/tool-xanh-demo.git && find ./tool-xanh-demo -type f -name "*.sh" -exec chmod +x {} \;'
