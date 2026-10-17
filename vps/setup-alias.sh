@@ -61,8 +61,9 @@ alias llastbm='./tool/vps/setup-security.sh'
 alias llastat='./tool/vps/install-all-tools.sh'
 alias llastdk='./tool/vps/install-docker.sh'
 alias llastng='./tool/vps/install-nginx.sh'
+alias llasta='bash ./tool/vps/setup-new-vps.sh'
 
-alias llastsw='sudo fallocate -l 2G /swapfile; sudo chmod 600 /swapfile; sudo mkswap /swapfile; sudo swapon /swapfile; echo "/swapfile none swap sw 0 0" | sudo tee -a /etc/fstab; free -h'
+alias llastsw='bash ./tool/vps/setup-new-vps.sh --swap-only'
 
 
 

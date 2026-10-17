@@ -29,7 +29,7 @@ sudo apt install -y \
 echo "🔑 Thêm Docker GPG key..."
 sudo mkdir -p /etc/apt/keyrings
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | \
-sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+sudo gpg --dearmor --yes -o /etc/apt/keyrings/docker.gpg
 
 # 4. Thêm Docker repo
 echo "➕ Thêm Docker repository..."
@@ -57,7 +57,9 @@ fi
 
 # 8. Add user vào group docker
 echo "➕ Add user $CURRENT_USER vào group docker..."
-sudo usermod -aG docker "$CURRENT_USER"
+if ! id -nG "$CURRENT_USER" | tr ' ' '\n' | grep -Fxq docker; then
+    sudo usermod -aG docker "$CURRENT_USER"
+fi
 
 # 9. Test docker
 echo "🧪 Test Docker..."

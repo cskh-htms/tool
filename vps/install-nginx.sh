@@ -2,10 +2,10 @@
 set -e
 
 echo "=== Update system ==="
-sudo apt update && sudo apt upgrade -y
+sudo apt update -y && sudo apt upgrade -y
 
 echo "=== Install Nginx (Ubuntu repo - stable) ==="
-sudo apt install nginx -y
+sudo apt install -y nginx
 sudo systemctl enable nginx
 sudo systemctl start nginx
 
@@ -17,9 +17,9 @@ fi
 
 echo "=== Install Certbot via SNAP (recommended) ==="
 sudo apt install snapd -y
-sudo snap install core
-sudo snap refresh core
-sudo snap install --classic certbot
+sudo snap install core || sudo snap refresh core
+sudo snap refresh core || true
+sudo snap install --classic certbot || sudo snap refresh certbot
 
 echo "=== Symlink certbot ==="
 sudo ln -sf /snap/bin/certbot /usr/bin/certbot
