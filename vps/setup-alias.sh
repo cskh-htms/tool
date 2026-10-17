@@ -124,6 +124,37 @@ llangxn() {
 
 
 
+
+# cache 
+# llachs - Kiem tra Cloudflare Cache
+# Su dung: llachs htms.vn
+#          llachs htms.vn/images/banner.webp
+# ==================================================
+
+llachs() {
+    local url="${1:?Usage: llachs domain.com}"
+
+    # Tu dong them https:// neu chua co
+    [[ "$url" =~ ^https?:// ]] || url="https://$url"
+
+    echo "URL: $url"
+    echo "--------------------------------"
+
+    for i in 1 2 3; do
+        echo "===== LAN $i ====="
+
+        curl -sSI -L --max-time 15 "$url" \
+            | grep -iE '^(HTTP/|server:|cf-cache-status:|cache-control:|age:)'
+
+        sleep 2
+    done
+}
+
+
+
+
+
+
 #
 #
 #
