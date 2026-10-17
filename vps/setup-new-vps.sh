@@ -44,10 +44,17 @@ sudo mkdir -p "$DPKG_CONFIG_DIR" "$APT_CONFIG_DIR"
 printf '%s\n' 'force-confdef' 'force-confold' | sudo tee "$DPKG_CONFIG_FILE" >/dev/null
 sudo tee "$APT_CONFIG_FILE" >/dev/null <<'EOF'
 Dpkg::Options {
-  "--force-confdef";
   "--force-confold";
 };
 EOF
+
+# Package conffile prompts are handled by dpkg, not debconf. Pass the option
+# directly to every apt/dpkg process as a final safeguard against a frontend
+# ignoring the config snippets above.
+export DEBIAN_FRONTEND=noninteractive
+export DEBIAN_PRIORITY=critical
+export UCF_FORCE_CONFFOLD=1
+export NEEDRESTART_MODE=a
 
 restore_config_file() {
   local target_file="$1"
@@ -68,13 +75,6 @@ cleanup() {
   fi
 }
 trap cleanup EXIT
-
-# Keep locally modified configuration files (including sshd_config) and
-# answer package-manager questions noninteractively. This is dpkg's default.
-export DEBIAN_FRONTEND=noninteractive
-export DEBIAN_PRIORITY=critical
-export UCF_FORCE_CONFFOLD=1
-export NEEDRESTART_MODE=a
 
 run_step() {
   local label="$1"
