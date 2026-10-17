@@ -16,28 +16,58 @@ if [[ "$EUID" -ne 0 ]]; then
   trap 'kill "$SUDO_KEEPALIVE_PID" 2>/dev/null || true' EXIT
 fi
 
-# dpkg's conffile prompt is controlled by dpkg itself, so set its defaults
-# globally for this run. This also covers packages installed by helper scripts
-# that invoke apt without forwarding command-line options. Preserve any existing
-# file and restore it on success or failure.
+# dpkg asks how to handle locally changed config files during upgrades.
+# Set the default in both dpkg and apt config so it applies even when a helper
+# script invokes apt without forwarding command-line options. Restore existing
+# files on exit, including when a step fails.
 DPKG_CONFIG_DIR=/etc/dpkg/dpkg.cfg.d
 DPKG_CONFIG_FILE="$DPKG_CONFIG_DIR/99-llasta-noninteractive"
+APT_CONFIG_DIR=/etc/apt/apt.conf.d
+APT_CONFIG_FILE="$APT_CONFIG_DIR/99-llasta-noninteractive"
 DPKG_CONFIG_BACKUP=""
-if [[ -e "$DPKG_CONFIG_FILE" ]]; then
-  DPKG_CONFIG_BACKUP="$(mktemp)"
-  sudo cp -p "$DPKG_CONFIG_FILE" "$DPKG_CONFIG_BACKUP"
-fi
-sudo mkdir -p "$DPKG_CONFIG_DIR"
-printf '%s\n' 'force-confdef' 'force-confold' | sudo tee "$DPKG_CONFIG_FILE" >/dev/null
-restore_dpkg_config() {
-  if [[ -n "$DPKG_CONFIG_BACKUP" ]]; then
-    sudo cp -p "$DPKG_CONFIG_BACKUP" "$DPKG_CONFIG_FILE"
-    rm -f "$DPKG_CONFIG_BACKUP"
-  else
-    sudo rm -f "$DPKG_CONFIG_FILE"
+APT_CONFIG_BACKUP=""
+
+backup_if_present() {
+  local source_file="$1"
+  local backup_var="$2"
+  if sudo test -e "$source_file"; then
+    local backup_file
+    backup_file="$(mktemp)"
+    sudo cp -p "$source_file" "$backup_file"
+    printf -v "$backup_var" '%s' "$backup_file"
   fi
 }
-trap restore_dpkg_config EXIT
+
+backup_if_present "$DPKG_CONFIG_FILE" DPKG_CONFIG_BACKUP
+backup_if_present "$APT_CONFIG_FILE" APT_CONFIG_BACKUP
+sudo mkdir -p "$DPKG_CONFIG_DIR" "$APT_CONFIG_DIR"
+printf '%s\n' 'force-confdef' 'force-confold' | sudo tee "$DPKG_CONFIG_FILE" >/dev/null
+sudo tee "$APT_CONFIG_FILE" >/dev/null <<'EOF'
+Dpkg::Options {
+  "--force-confdef";
+  "--force-confold";
+};
+EOF
+
+restore_config_file() {
+  local target_file="$1"
+  local backup_file="$2"
+  if [[ -n "$backup_file" ]]; then
+    sudo cp -p "$backup_file" "$target_file"
+    rm -f "$backup_file"
+  else
+    sudo rm -f "$target_file"
+  fi
+}
+
+cleanup() {
+  restore_config_file "$DPKG_CONFIG_FILE" "$DPKG_CONFIG_BACKUP"
+  restore_config_file "$APT_CONFIG_FILE" "$APT_CONFIG_BACKUP"
+  if [[ -n "${SUDO_KEEPALIVE_PID:-}" ]]; then
+    kill "$SUDO_KEEPALIVE_PID" 2>/dev/null || true
+  fi
+}
+trap cleanup EXIT
 
 # Keep locally modified configuration files (including sshd_config) and
 # answer package-manager questions noninteractively. This is dpkg's default.
