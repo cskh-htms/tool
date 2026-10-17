@@ -61,9 +61,10 @@ alias llastbm='./tool/vps/setup-security.sh'
 alias llastat='./tool/vps/install-all-tools.sh'
 alias llastdk='./tool/vps/install-docker.sh'
 alias llastng='./tool/vps/install-nginx.sh'
+alias llastsw='bash ./tool/vps/setup-new-vps.sh --swap-only'
+alias llastf2='./tool/vps/cau-hinh-fail2ban-ssh-23266.sh'
 alias llasta='bash ./tool/vps/setup-new-vps.sh'
 
-alias llastsw='bash ./tool/vps/setup-new-vps.sh --swap-only'
 
 
 

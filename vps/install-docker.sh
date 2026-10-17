@@ -14,11 +14,11 @@ echo "👉 User hiện tại: $CURRENT_USER"
 # 1. Update hệ thống
 echo "🔄 Update hệ thống..."
 sudo apt update -y
-sudo apt upgrade -y
+sudo apt -o Dpkg::Options::=--force-confdef -o Dpkg::Options::=--force-confold upgrade -y
 
 # 2. Cài các gói cần thiết
 echo "📦 Cài gói phụ thuộc..."
-sudo apt install -y \
+sudo apt -o Dpkg::Options::=--force-confdef -o Dpkg::Options::=--force-confold install -y \
     ca-certificates \
     curl \
     gnupg \
@@ -42,7 +42,7 @@ sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 # 5. Cài Docker Engine + Compose
 echo "🐳 Cài Docker Engine & Docker Compose..."
 sudo apt update -y
-sudo apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+sudo apt -o Dpkg::Options::=--force-confdef -o Dpkg::Options::=--force-confold install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 
 # 6. Enable Docker service
 echo "🚀 Enable Docker service..."

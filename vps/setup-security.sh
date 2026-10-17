@@ -8,13 +8,13 @@ echo "🚀 START HARDEN VPS..."
 # 1. UPDATE SYSTEM
 # =========================
 sudo apt update -y
-sudo apt upgrade -y
+sudo apt -o Dpkg::Options::=--force-confdef -o Dpkg::Options::=--force-confold upgrade -y
 
 # =========================
 # 2. INSTALL PACKAGES
 # =========================
 echo "📦 Installing packages..."
-sudo apt install -y ufw fail2ban curl
+sudo apt -o Dpkg::Options::=--force-confdef -o Dpkg::Options::=--force-confold install -y ufw fail2ban curl
 
 # =========================
 # 3. DOCKER HARDEN (SAFE)

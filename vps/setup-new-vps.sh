@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-# Run the standard VPS setup in the same order as llastbm, llastat,
-# llastdk, llastng, and llastsw. Authenticate sudo once, then run all
+# Run the standard VPS setup in the same order as llastbm, llastf2,
+# llastat, llastdk, llastng, and llastsw. Authenticate sudo once, then run all
 # steps without interactive confirmation prompts.
 set -Eeuo pipefail
 
@@ -16,8 +16,12 @@ if [[ "$EUID" -ne 0 ]]; then
   trap 'kill "$SUDO_KEEPALIVE_PID" 2>/dev/null || true' EXIT
 fi
 
-# Prevent apt/dpkg from asking whether to keep or replace configuration files.
+# Keep locally modified configuration files (including sshd_config) and
+# answer package-manager questions noninteractively. This is dpkg's default.
 export DEBIAN_FRONTEND=noninteractive
+export DEBIAN_PRIORITY=critical
+export UCF_FORCE_CONFFOLD=1
+export NEEDRESTART_MODE=a
 
 run_step() {
   local label="$1"
@@ -69,10 +73,11 @@ elif [[ $# -gt 0 ]]; then
   exit 2
 fi
 
-run_step '1/5 VPS security' 'setup-security.sh'
-run_step '2/5 Common tools' 'install-all-tools.sh'
-run_step '3/5 Docker' 'install-docker.sh'
-run_step '4/5 Nginx and Certbot' 'install-nginx.sh'
+run_step '1/6 VPS security' 'setup-security.sh'
+run_step '2/6 Configure Fail2ban SSH on port 23266' 'cau-hinh-fail2ban-ssh-23266.sh'
+run_step '3/6 Common tools' 'install-all-tools.sh'
+run_step '4/6 Docker' 'install-docker.sh'
+run_step '5/6 Nginx and Certbot' 'install-nginx.sh'
 create_swap
 
 printf '\n✅ VPS setup completed successfully.\n'

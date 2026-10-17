@@ -2,10 +2,10 @@
 set -e
 
 echo "=== Update system ==="
-sudo apt update -y && sudo apt upgrade -y
+sudo apt update -y && sudo apt -o Dpkg::Options::=--force-confdef -o Dpkg::Options::=--force-confold upgrade -y
 
 echo "=== Install Nginx (Ubuntu repo - stable) ==="
-sudo apt install -y nginx
+sudo apt -o Dpkg::Options::=--force-confdef -o Dpkg::Options::=--force-confold install -y nginx
 sudo systemctl enable nginx
 sudo systemctl start nginx
 
@@ -16,7 +16,7 @@ if command -v ufw >/dev/null 2>&1; then
 fi
 
 echo "=== Install Certbot via SNAP (recommended) ==="
-sudo apt install snapd -y
+sudo apt -o Dpkg::Options::=--force-confdef -o Dpkg::Options::=--force-confold install -y snapd
 sudo snap install core || sudo snap refresh core
 sudo snap refresh core || true
 sudo snap install --classic certbot || sudo snap refresh certbot

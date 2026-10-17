@@ -1,0 +1,5 @@
+rm -rf ~/tool && 
+git clone https://github.com/cskh-htms/tool.git && 
+chmod -R 755 ~/tool &&
+~/tool/vps/setup-alias.sh &&
+source ~/.bashrc
