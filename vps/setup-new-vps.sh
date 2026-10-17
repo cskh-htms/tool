@@ -16,6 +16,29 @@ if [[ "$EUID" -ne 0 ]]; then
   trap 'kill "$SUDO_KEEPALIVE_PID" 2>/dev/null || true' EXIT
 fi
 
+# dpkg's conffile prompt is controlled by dpkg itself, so set its defaults
+# globally for this run. This also covers packages installed by helper scripts
+# that invoke apt without forwarding command-line options. Preserve any existing
+# file and restore it on success or failure.
+DPKG_CONFIG_DIR=/etc/dpkg/dpkg.cfg.d
+DPKG_CONFIG_FILE="$DPKG_CONFIG_DIR/99-llasta-noninteractive"
+DPKG_CONFIG_BACKUP=""
+if [[ -e "$DPKG_CONFIG_FILE" ]]; then
+  DPKG_CONFIG_BACKUP="$(mktemp)"
+  sudo cp -p "$DPKG_CONFIG_FILE" "$DPKG_CONFIG_BACKUP"
+fi
+sudo mkdir -p "$DPKG_CONFIG_DIR"
+printf '%s\n' 'force-confdef' 'force-confold' | sudo tee "$DPKG_CONFIG_FILE" >/dev/null
+restore_dpkg_config() {
+  if [[ -n "$DPKG_CONFIG_BACKUP" ]]; then
+    sudo cp -p "$DPKG_CONFIG_BACKUP" "$DPKG_CONFIG_FILE"
+    rm -f "$DPKG_CONFIG_BACKUP"
+  else
+    sudo rm -f "$DPKG_CONFIG_FILE"
+  fi
+}
+trap restore_dpkg_config EXIT
+
 # Keep locally modified configuration files (including sshd_config) and
 # answer package-manager questions noninteractively. This is dpkg's default.
 export DEBIAN_FRONTEND=noninteractive
@@ -43,19 +66,19 @@ create_swap() {
     echo 'Swap /swapfile is already active; skipping creation.'
   else
     if [[ ! -e "$swapfile" ]]; then
-      fallocate -l 2G "$swapfile"
-    elif [[ "$(stat -c '%s' "$swapfile")" -lt 2147483648 ]]; then
+      sudo fallocate -l 2G "$swapfile"
+    elif [[ "$(sudo stat -c '%s' "$swapfile")" -lt 2147483648 ]]; then
       echo '/swapfile exists and is smaller than 2G; refusing to overwrite it.' >&2
       exit 1
     fi
 
-    chmod 600 "$swapfile"
-    mkswap "$swapfile"
-    swapon "$swapfile"
+    sudo chmod 600 "$swapfile"
+    sudo mkswap "$swapfile"
+    sudo swapon "$swapfile"
   fi
 
-  if ! grep -Fqx "$fstab_entry" /etc/fstab; then
-    printf '%s\n' "$fstab_entry" >> /etc/fstab
+  if ! sudo grep -Fqx "$fstab_entry" /etc/fstab; then
+    printf '%s\n' "$fstab_entry" | sudo tee -a /etc/fstab >/dev/null
   fi
   free -h
 }
