@@ -368,7 +368,7 @@ alias lladkp='docker system prune'
 alias lladkpa='docker system prune -a'
 alias lladkpaf='docker system prune -af'
 
-alias lladkp="docker ps --format 'table {{.Names}}\t{{.Ports}}'"
+alias lladkpo="docker ps --format 'table {{.Names}}\t{{.Ports}}'"
 
 
 
