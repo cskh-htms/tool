@@ -102,16 +102,11 @@ alias llacron='crontab -e'
 alias llacrol='tail -n 50 -f /home/user_one_htms/logs/cron.log'
 
 
-#
-# test vps ---------------------------------------------------
-alias llavpsc='sudo bash "$HOME/tool/vps/test-cpu.sh"'
-alias llavpsr='sudo bash "$HOME/tool/vps/test-ram.sh"'
-alias llavpsn='sudo bash "$HOME/tool/vps/test-mang.sh"'
-alias llavpsd='sudo bash "$HOME/tool/vps/test-io.sh"'
+
 #
 #
 #
-# nginx
+# nginx: -------------------------------------
 alias llangxsa='sudo ls /etc/nginx/sites-available'
 alias llangxse='sudo ls /etc/nginx/sites-enabled'
 alias llangxs='sudo systemctl status nginx'
@@ -121,8 +116,8 @@ llangxn() {
     sudo nano "/etc/nginx/sites-available/$1"
 }
 
-
-
+alias llangxla='sudo tail -n 50 -F /var/log/nginx/access.log'
+alias llangxle='ssudo tail -n 50 -F /var/log/nginx/error.log'
 
 
 # cache 
@@ -196,13 +191,44 @@ alias llaips='curl -4 https://api.ipify.org; echo'
 #
 #
 #
-# vps - key-user  ---tat mo dang nhap bang password , tat mo cho phep root dan gnhap--------------------------------------
+# vps: - key-user  ---tat mo dang nhap bang password , tat mo cho phep root dan gnhap--------------------------------------
 alias llapd='printf "%s\n" "PasswordAuthentication no" "KbdInteractiveAuthentication no" "PubkeyAuthentication yes" | sudo tee /etc/ssh/sshd_config.d/00-disable-password.conf >/dev/null && sudo chmod 644 /etc/ssh/sshd_config.d/00-disable-password.conf && sudo sshd -t && sudo systemctl reload ssh && sudo sshd -T | grep -E "^(permitrootlogin|pubkeyauthentication|passwordauthentication|kbdinteractiveauthentication|usepam) "'
 alias llape='printf "%s\n" "PasswordAuthentication yes" "KbdInteractiveAuthentication no" "PubkeyAuthentication yes" | sudo tee /etc/ssh/sshd_config.d/00-disable-password.conf >/dev/null && sudo chmod 644 /etc/ssh/sshd_config.d/00-disable-password.conf && sudo sshd -t && sudo systemctl reload ssh && sudo sshd -T | grep -E "^(permitrootlogin|pubkeyauthentication|passwordauthentication|kbdinteractiveauthentication|usepam) "'
 alias llard='(sudo grep -q "^PermitRootLogin" /etc/ssh/sshd_config.d/50-cloud-init.conf && sudo sed -i "s/^PermitRootLogin .*/PermitRootLogin no/" /etc/ssh/sshd_config.d/50-cloud-init.conf || echo "PermitRootLogin no" | sudo tee -a /etc/ssh/sshd_config.d/50-cloud-init.conf >/dev/null) && sudo sshd -t && sudo systemctl restart ssh && sudo sshd -T | grep -E "permitrootlogin|pubkeyauthentication|passwordauthentication|kbdinteractiveauthentication|challengeresponseauthentication|usepam"'
 alias llare='printf "%s\n" "PermitRootLogin yes" | sudo tee /etc/ssh/sshd_config.d/00-root-login.conf >/dev/null && sudo chmod 644 /etc/ssh/sshd_config.d/00-root-login.conf && sudo sshd -t && sudo systemctl reload ssh && sudo sshd -T | grep -E "^(permitrootlogin|pubkeyauthentication|passwordauthentication|kbdinteractiveauthentication|usepam) "'
-#alias llaka='_llakey them'
-#alias llakd='_llakey xoa'
+
+alias llavpsc='sudo bash "$HOME/tool/vps/test-cpu.sh"'
+alias llavpsr='sudo bash "$HOME/tool/vps/test-ram.sh"'
+alias llavpsn='sudo bash "$HOME/tool/vps/test-mang.sh"'
+alias llavpsd='sudo bash "$HOME/tool/vps/test-io.sh"'
+
+#xem cac port nao dang su dung ung dung nao
+llavpsp() {
+  {
+    printf 'PORT/PROTO\tAPP\n'
+    sudo ss -H -lntup | awk '{
+      port=$5
+      sub(/^.*:/, "", port)
+      app=$7
+      if (match(app, /"[^"]+"/))
+        app=substr(app, RSTART+1, RLENGTH-2)
+      else
+        app="unknown"
+      printf "%s\t%s\n", $1 "/" port, app
+    }' | sort -u
+  } | column -t -s "$(printf '\t')"
+}
+
+
+
+
+
+
+
+
+
+
+
 
 
 #
@@ -253,9 +279,9 @@ alias llafr='sudo systemctl restart fail2ban'
 
 
 #
-# dns ------------------------------------------
+# dns: ------------------------------------------
 # thay doi dns cua google
-lladnsg() {
+lladnsg() { # thay doi dns google dugn google dns resove
     sudo netplan set --origin-hint 50-cloud-init \
         'ethernets.eth0.nameservers=null' &&
     sudo netplan set --origin-hint 50-cloud-init \
@@ -266,6 +292,7 @@ lladnsg() {
     resolvectl status eth0
 }
 alias lladnsv='resolvectl status'
+
 
 
 
