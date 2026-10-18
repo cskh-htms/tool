@@ -206,7 +206,7 @@ alias llavpsd='sudo bash "$HOME/tool/vps/test-io.sh"'
 
 alias llavpstst='sudo timedatectl set-timezone Asia/Ho_Chi_Minh'
 alias llavpstv="date '+%Y-%m-%d %H:%M:%S %Z (UTC%:z)'"
-
+alias llavpsts="date '+%Y-%m-%d %H:%M:%S %Z (UTC%:z)'"
 
 
 
