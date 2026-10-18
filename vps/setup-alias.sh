@@ -179,11 +179,7 @@ alias llaclfn='nano ./cloudfly/.env.cloudfly'
 alias llaclfp='chmod 644  ./cloudfly/.env.cloudfly'
 
 
-#
-#
-#
-# ip
-alias llaips='curl -4 https://api.ipify.org; echo'
+
 
 
 
@@ -192,27 +188,22 @@ alias llaips='curl -4 https://api.ipify.org; echo'
 #
 #
 # vps: - key-user  ---tat mo dang nhap bang password , tat mo cho phep root dan gnhap--------------------------------------
-alias llapd='printf "%s\n" "PasswordAuthentication no" "KbdInteractiveAuthentication no" "PubkeyAuthentication yes" | sudo tee /etc/ssh/sshd_config.d/00-disable-password.conf >/dev/null && sudo chmod 644 /etc/ssh/sshd_config.d/00-disable-password.conf && sudo sshd -t && sudo systemctl reload ssh && sudo sshd -T | grep -E "^(permitrootlogin|pubkeyauthentication|passwordauthentication|kbdinteractiveauthentication|usepam) "'
-alias llape='printf "%s\n" "PasswordAuthentication yes" "KbdInteractiveAuthentication no" "PubkeyAuthentication yes" | sudo tee /etc/ssh/sshd_config.d/00-disable-password.conf >/dev/null && sudo chmod 644 /etc/ssh/sshd_config.d/00-disable-password.conf && sudo sshd -t && sudo systemctl reload ssh && sudo sshd -T | grep -E "^(permitrootlogin|pubkeyauthentication|passwordauthentication|kbdinteractiveauthentication|usepam) "'
-alias llard='(sudo grep -q "^PermitRootLogin" /etc/ssh/sshd_config.d/50-cloud-init.conf && sudo sed -i "s/^PermitRootLogin .*/PermitRootLogin no/" /etc/ssh/sshd_config.d/50-cloud-init.conf || echo "PermitRootLogin no" | sudo tee -a /etc/ssh/sshd_config.d/50-cloud-init.conf >/dev/null) && sudo sshd -t && sudo systemctl restart ssh && sudo sshd -T | grep -E "permitrootlogin|pubkeyauthentication|passwordauthentication|kbdinteractiveauthentication|challengeresponseauthentication|usepam"'
-alias llare='printf "%s\n" "PermitRootLogin yes" | sudo tee /etc/ssh/sshd_config.d/00-root-login.conf >/dev/null && sudo chmod 644 /etc/ssh/sshd_config.d/00-root-login.conf && sudo sshd -t && sudo systemctl reload ssh && sudo sshd -T | grep -E "^(permitrootlogin|pubkeyauthentication|passwordauthentication|kbdinteractiveauthentication|usepam) "'
+alias llavpspd='printf "%s\n" "PasswordAuthentication no" "KbdInteractiveAuthentication no" "PubkeyAuthentication yes" | sudo tee /etc/ssh/sshd_config.d/00-disable-password.conf >/dev/null && sudo chmod 644 /etc/ssh/sshd_config.d/00-disable-password.conf && sudo sshd -t && sudo systemctl reload ssh && sudo sshd -T | grep -E "^(permitrootlogin|pubkeyauthentication|passwordauthentication|kbdinteractiveauthentication|usepam) "'
+alias llavpspe='printf "%s\n" "PasswordAuthentication yes" "KbdInteractiveAuthentication no" "PubkeyAuthentication yes" | sudo tee /etc/ssh/sshd_config.d/00-disable-password.conf >/dev/null && sudo chmod 644 /etc/ssh/sshd_config.d/00-disable-password.conf && sudo sshd -t && sudo systemctl reload ssh && sudo sshd -T | grep -E "^(permitrootlogin|pubkeyauthentication|passwordauthentication|kbdinteractiveauthentication|usepam) "'
+alias llavpsrd='(sudo grep -q "^PermitRootLogin" /etc/ssh/sshd_config.d/50-cloud-init.conf && sudo sed -i "s/^PermitRootLogin .*/PermitRootLogin no/" /etc/ssh/sshd_config.d/50-cloud-init.conf || echo "PermitRootLogin no" | sudo tee -a /etc/ssh/sshd_config.d/50-cloud-init.conf >/dev/null) && sudo sshd -t && sudo systemctl restart ssh && sudo sshd -T | grep -E "permitrootlogin|pubkeyauthentication|passwordauthentication|kbdinteractiveauthentication|challengeresponseauthentication|usepam"'
+alias llavpsre='printf "%s\n" "PermitRootLogin yes" | sudo tee /etc/ssh/sshd_config.d/00-root-login.conf >/dev/null && sudo chmod 644 /etc/ssh/sshd_config.d/00-root-login.conf && sudo sshd -t && sudo systemctl reload ssh && sudo sshd -T | grep -E "^(permitrootlogin|pubkeyauthentication|passwordauthentication|kbdinteractiveauthentication|usepam) "'
 
 alias llavpsc='sudo bash "$HOME/tool/vps/test-cpu.sh"'
 alias llavpsr='sudo bash "$HOME/tool/vps/test-ram.sh"'
 alias llavpsn='sudo bash "$HOME/tool/vps/test-mang.sh"'
 alias llavpsd='sudo bash "$HOME/tool/vps/test-io.sh"'
 
-
-
 alias llavpstst='sudo timedatectl set-timezone Asia/Ho_Chi_Minh'
 alias llavpstv="date '+%Y-%m-%d %H:%M:%S %Z (UTC%:z)'"
 alias llavpsts="date '+%Y-%m-%d %H:%M:%S %Z (UTC%:z)'"
 
-
-
-
-
-
+alias llavpsip='curl -4 https://api.ipify.org; echo'
+# llavpsp -> xem cac port cua vps
 
 #xem cac port nao dang su dung ung dung nao
 llavpsp() {
@@ -230,16 +221,6 @@ llavpsp() {
     }' | sort -u
   } | column -t -s "$(printf '\t')"
 }
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -413,11 +394,12 @@ PY
 
 #
 # fail2ban---------------------------------------------------
-alias llaf2bs='sudo systemctl status fail2ban'
-alias llaf2bd='sudo systemctl stop fail2ban'
-alias llaf2be='sudo systemctl start fail2ban'
-alias llaf2bvb='sudo fail2ban-client get sshd banned'
-llaf2bub() {
+alias llaf2s='sudo systemctl status fail2ban'
+alias llaf2d='sudo systemctl stop fail2ban'
+alias llaf2e='sudo systemctl start fail2ban'
+alias llaf2vb='sudo fail2ban-client get sshd banned'
+alias llaf2sb='sudo fail2ban-client get sshd banned'
+llaf2ub() {
     local ip
     read -r -p "Nhập IP cần mở khóa: " ip
     if [[ -z "$ip" ]]; then
@@ -427,17 +409,20 @@ llaf2bub() {
     sudo fail2ban-client set sshd unbanip "$ip"
 }
 
-# fail2ban -----------------------------------
-alias llafh='alias | grep "^alias llaf"'
-alias llafa='sudo fail2ban-client status'
-alias llafs='sudo fail2ban-client status sshd'
-alias llafl='sudo tail -f /var/log/fail2ban.log'
-alias llafla='sudo tail -f /var/log/auth.log'
-alias llafr='sudo systemctl restart fail2ban'
+alias llaf2ss='sudo fail2ban-client status sshd'
+alias llaf2l='sudo tail -f /var/log/fail2ban.log'
+
+
+
 
 
 #
 # dns: ------------------------------------------
+alias lladnsv='resolvectl status'
+alias lladnss='resolvectl status'
+#lladnsg -> thay doi dns cua vps sang google
+
+
 # thay doi dns cua google
 lladnsg() { # thay doi dns google dugn google dns resove
     sudo netplan set --origin-hint 50-cloud-init \
