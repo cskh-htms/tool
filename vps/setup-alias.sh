@@ -260,6 +260,11 @@ alias llasshrs='sudo systemctl restart ssh'
 # monitor:
 alias llamntn='sudo nano /etc/web-monitor/sites.txt'
 
+alias llamntst='sudo bash ~/tool/scripts/monitor-me/install.sh'
+
+
+
+
 # xem network monitor
 llamntnv() {
   sudo python3 - <<'PY'
