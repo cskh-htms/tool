@@ -117,7 +117,7 @@ llangxn() {
 }
 
 alias llangxla='sudo tail -n 50 -F /var/log/nginx/access.log'
-alias llangxle='ssudo tail -n 50 -F /var/log/nginx/error.log'
+alias llangxle='sudo tail -n 50 -F /var/log/nginx/error.log'
 
 
 # cache 
