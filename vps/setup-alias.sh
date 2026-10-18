@@ -257,8 +257,87 @@ alias llasshrs='sudo systemctl restart ssh'
 #
 #
 #
-# monitor
+# monitor:
 alias llamntn='sudo nano /etc/web-monitor/sites.txt'
+
+# xem network monitor
+llamntnv() {
+  sudo python3 - <<'PY'
+import sqlite3, json, datetime
+
+vn = datetime.timezone(datetime.timedelta(hours=7))
+db = sqlite3.connect('/var/lib/vps-resource-monitor/metrics.sqlite3')
+rows = db.execute("""
+    SELECT id, ts, object, percent, values_json
+    FROM (
+        SELECT id, ts, object, percent, values_json
+        FROM samples
+        WHERE type = 'network'
+          AND ts >= CAST(strftime('%s', 'now', '-30 days') AS INTEGER)
+        ORDER BY ts DESC, id DESC
+        LIMIT 100
+    )
+    ORDER BY ts ASC, id ASC
+""").fetchall()
+
+def fmt(value, suffix=''):
+    return '-' if value is None else f'{value:.2f}{suffix}'
+
+print(f"{'ID':>7} {'Thời gian VN':19} {'Card':8} {'RX Mbps':>9} {'RX %':>8} {'TX Mbps':>9} {'TX %':>8} {'Cao nhất %':>11}")
+for ident, ts, interface, peak, raw in rows:
+    values = json.loads(raw)
+    when = datetime.datetime.fromtimestamp(ts, vn).strftime('%Y-%m-%d %H:%M:%S')
+    print(f"{ident:>7} {when:19} {interface:8} "
+          f"{fmt(values.get('rx_mbps')):>9} {fmt(values.get('rx_percent'), '%'):>8} "
+          f"{fmt(values.get('tx_mbps')):>9} {fmt(values.get('tx_percent'), '%'):>8} "
+          f"{fmt(peak, '%'):>11}")
+db.close()
+PY
+}
+
+
+llamntngxv() {
+  sudo python3 - <<'PY'
+import sqlite3, json, datetime
+
+vn = datetime.timezone(datetime.timedelta(hours=7))
+with open('/etc/vps-resource-monitor/config.json') as f:
+    threshold = int(json.load(f).get('nginx_alert_threshold_per_minute', 1000))
+
+db = sqlite3.connect('/var/lib/vps-resource-monitor/metrics.sqlite3')
+rows = db.execute("""
+    SELECT id, ts, values_json
+    FROM (
+        SELECT id, ts, values_json
+        FROM samples
+        WHERE type = 'nginx_requests'
+          AND ts >= CAST(strftime('%s', 'now', '-30 days') AS INTEGER)
+        ORDER BY ts DESC, id DESC
+        LIMIT 100
+    )
+    ORDER BY ts ASC, id ASC
+""").fetchall()
+
+print(f"{'ID':>7} {'Khoảng phút (VN)':23} {'Requests':>9} {'Ngưỡng':>8} {'Trạng thái':>12}")
+for ident, ts, raw in rows:
+    values = json.loads(raw)
+    start = datetime.datetime.fromtimestamp(values.get('window_start', ts - 60), vn)
+    end = datetime.datetime.fromtimestamp(values.get('window_end', ts), vn)
+    period = start.strftime('%Y-%m-%d %H:%M') + '-' + end.strftime('%H:%M')
+    count = int(values.get('request_count', 0))
+    status = 'VUOT' if count > threshold else 'OK'
+    print(f"{ident:>7} {period:23} {count:>9} {threshold:>8} {status:>12}")
+db.close()
+PY
+}
+
+
+
+
+
+
+
+
 
 
 
