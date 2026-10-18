@@ -332,10 +332,72 @@ PY
 }
 
 
+llamntrv() {
+sudo python3 - <<'PY'
+import sqlite3, json, datetime
+
+db = sqlite3.connect('/var/lib/vps-resource-monitor/metrics.sqlite3')
+cutoff = int(datetime.datetime.now().timestamp()) - 30 * 86400
+rows = db.execute("""
+    SELECT id, ts, percent, values_json
+    FROM samples
+    WHERE type = 'ram' AND ts >= ?
+    ORDER BY ts DESC, id DESC
+    LIMIT 100
+""", (cutoff,)).fetchall()
+db.close()
+
+rows.reverse()
+tz = datetime.timezone(datetime.timedelta(hours=7))
+
+print(f"{'ID':>7} {'Thời gian (UTC+7)':19} {'Đã dùng':>12} {'Tổng RAM':>12} {'Còn trống':>12} {'RAM %':>8}")
+for ident, ts, percent, raw in rows:
+    v = json.loads(raw)
+    when = datetime.datetime.fromtimestamp(ts, tz).strftime('%Y-%m-%d %H:%M:%S')
+    print(f"{ident:>7} {when:19} "
+          f"{v.get('used_mb', 0):>9.0f} MB "
+          f"{v.get('total_mb', 0):>9.0f} MB "
+          f"{v.get('available_mb', 0):>9.0f} MB "
+          f"{percent if percent is not None else 0:>7.2f}%")
+
+if not rows:
+    print("Chưa có bản ghi RAM.")
+PY
+}
 
 
+llamntcv() {
+sudo python3 - <<'PY'
+import sqlite3, json, datetime
 
+db = sqlite3.connect('/var/lib/vps-resource-monitor/metrics.sqlite3')
+cutoff = int(datetime.datetime.now().timestamp()) - 30 * 86400
+rows = db.execute("""
+    SELECT id, ts, percent, values_json
+    FROM samples
+    WHERE type = 'cpu' AND ts >= ?
+    ORDER BY ts DESC, id DESC
+    LIMIT 100
+""", (cutoff,)).fetchall()
+db.close()
 
+rows.reverse()
+tz = datetime.timezone(datetime.timedelta(hours=7))
+
+print(f"{'ID':>7} {'Thời gian (UTC+7)':19} {'CPU':>8} {'I/O wait':>10} {'Load avg (1, 5, 15 phút)':>30}")
+for ident, ts, percent, raw in rows:
+    v = json.loads(raw)
+    when = datetime.datetime.fromtimestamp(ts, tz).strftime('%Y-%m-%d %H:%M:%S')
+    load = ', '.join(f"{x:.2f}" for x in v.get('load_average', [])) or '-'
+    iowait = v.get('iowait_percent')
+    iowait_text = f"{iowait:.2f}%" if iowait is not None else '-'
+    cpu_text = f"{percent:.2f}%" if percent is not None else '-'
+    print(f"{ident:>7} {when:19} {cpu_text:>8} {iowait_text:>10} {load:>30}")
+
+if not rows:
+    print("Chưa có bản ghi CPU.")
+PY
+}
 
 
 
