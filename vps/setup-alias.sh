@@ -202,6 +202,18 @@ alias llavpsr='sudo bash "$HOME/tool/vps/test-ram.sh"'
 alias llavpsn='sudo bash "$HOME/tool/vps/test-mang.sh"'
 alias llavpsd='sudo bash "$HOME/tool/vps/test-io.sh"'
 
+
+
+alias llavpstst='sudo timedatectl set-timezone Asia/Ho_Chi_Minh'
+alias llavpstv="date '+%Y-%m-%d %H:%M:%S %Z (UTC%:z)'"
+
+
+
+
+
+
+
+
 #xem cac port nao dang su dung ung dung nao
 llavpsp() {
   {
@@ -359,19 +371,14 @@ alias llamlo='docker logs -f mailserver'
 
 #
 # docker: --------------------------------------------
-alias lladkh='alias | grep "^alias lladk"'
 alias lladkc='docker ps -a --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}"'
 alias lladks='docker ps --format "table {{.Label \"com.docker.compose.project\"}}\t{{.Label \"com.docker.compose.service\"}}\t{{.Status}}"'
+
 alias lladkdf='docker system df'
-alias lladkdfv='docker system df -v'
 alias lladkp='docker system prune'
 alias lladkpa='docker system prune -a'
 alias lladkpaf='docker system prune -af'
-
 alias lladkpo="docker ps --format 'table {{.Names}}\t{{.Ports}}'"
-
-
-
 
 alias lladkbpa='docker builder prune --all --force'
 alias lladkbxpa='docker builder prune --all --force'
@@ -379,7 +386,10 @@ alias lladkbxpa='docker builder prune --all --force'
 alias lladksta='docker ps -q | xargs -r docker stop'
 alias lladkrsa='docker ps -aq | xargs -r docker start'
 
-alias lladkdfi='docker image ls -aq --no-trunc \
+#
+# docker images:--------------------------------------------
+alias lladkimpaf='docker image prune -a -f'
+alias lladkidf='docker image ls -aq --no-trunc \
   | sort -u \
   | xargs -r docker image inspect --format "{{.Size}}{{\"\t\"}}{{.Id}}{{\"\t\"}}{{join .RepoTags \",\"}}" \
   | sort -nr \
@@ -412,9 +422,14 @@ BEGIN {
     printf "%-32s %10s  %-12s  %-18s\n", "<khong co ten>", size, id, "<none>"
 }'\'''
 
+
+
 #
-# docker images--------------------------------------------
-alias lladkimpaf='docker image prune -a -f'
+#
+#
+# docker volume--------------------------------------------
+alias lladkvpa='docker volume prune --all'
+
 
 _lladkdfv() {
 python3 - <<'PY'
@@ -474,13 +489,9 @@ for index in sorted(sizes, key=sizes.get, reverse=True):
         print(f"{name:<55} {human(sizes[index]):>13}  {project:<28} {service}")
 PY
 }
-alias lladkdfv='_lladkdfv'
+alias lladkvdf='_lladkdfv'
 
-#
-#
-#
-# docker volume--------------------------------------------
-alias lladkvpa='docker volume prune --all'
+
 
 
 
