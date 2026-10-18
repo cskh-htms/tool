@@ -1,0 +1,18 @@
+{
+  "server_id": "",
+  "server_name": "",
+  "port": 9108,
+  "thresholds_percent": {"cpu": 75, "ram": 90, "disk": 80, "network": 80},
+  "retention_days": 5,
+  "telegram_env": "",
+  "network_interfaces": [],
+  "network_capacity_mbps": {},
+  "network_capacity_rx_mbps": {},
+  "network_capacity_tx_mbps": {},
+  "network_capacity_source": "",
+  "nginx_access_log": "/var/log/nginx/access.log",
+  "nginx_alert_threshold_per_minute": 1000,
+  "disk_mounts": [],
+  "api_default_limit": 100,
+  "api_max_limit": 1000
+}
