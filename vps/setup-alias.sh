@@ -394,12 +394,12 @@ PY
 
 #
 # fail2ban---------------------------------------------------
-alias llaf2s='sudo systemctl status fail2ban'
-alias llaf2d='sudo systemctl stop fail2ban'
-alias llaf2e='sudo systemctl start fail2ban'
-alias llaf2vb='sudo fail2ban-client get sshd banned'
-alias llaf2sb='sudo fail2ban-client get sshd banned'
-llaf2ub() {
+alias llaf2bs='sudo systemctl status fail2ban'
+alias llaf2bd='sudo systemctl stop fail2ban'
+alias llaf2be='sudo systemctl start fail2ban'
+alias llaf2bvb='sudo fail2ban-client get sshd banned'
+alias llaf2bsb='sudo fail2ban-client get sshd banned'
+llaf2bub() {
     local ip
     read -r -p "Nhập IP cần mở khóa: " ip
     if [[ -z "$ip" ]]; then
@@ -409,8 +409,11 @@ llaf2ub() {
     sudo fail2ban-client set sshd unbanip "$ip"
 }
 
-alias llaf2ss='sudo fail2ban-client status sshd'
-alias llaf2l='sudo tail -f /var/log/fail2ban.log'
+alias llaf2bl='sudo tail -f /var/log/fail2ban.log'
+
+alias llaf2bn='sudo nano /etc/fail2ban/jail.local'
+alias llaf2bclrs='sudo fail2ban-client reload'
+alias llaf2bclrl='sudo fail2ban-client reload'
 
 
 
@@ -421,7 +424,6 @@ alias llaf2l='sudo tail -f /var/log/fail2ban.log'
 alias lladnsv='resolvectl status'
 alias lladnss='resolvectl status'
 #lladnsg -> thay doi dns cua vps sang google
-
 
 # thay doi dns cua google
 lladnsg() { # thay doi dns google dugn google dns resove
