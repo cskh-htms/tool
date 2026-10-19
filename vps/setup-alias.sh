@@ -47,6 +47,7 @@ alias llast='rm -rf ./tool-store && git clone git@github.com:cskh-htms/tool-stor
 alias llatpl='rm -rf ./tool-template && git clone git@github.com:cskh-htms/tool-template.git && find ./tool-template -type f -name "*.sh" -exec chmod +x {} \;'
 alias llamt='rm -rf ./tool-maytinh && git clone git@github.com:cskh-htms/tool-maytinh.git && find ./tool-maytinh -type f -name "*.sh" -exec chmod +x {} \;'
 
+alias llald='rm -rf ./tool-landing && git clone git@github.com:cskh-htms/tool-landing.git && find ./tool-landing -type f -name "*.sh" -exec chmod +x {} \;'
 
 
 
@@ -414,6 +415,27 @@ alias llaf2bl='sudo tail -f /var/log/fail2ban.log'
 alias llaf2bn='sudo nano /etc/fail2ban/jail.local'
 alias llaf2bclrs='sudo fail2ban-client reload'
 alias llaf2bclrl='sudo fail2ban-client reload'
+alias llaf2bcls='sudo fail2ban-client status'
+# llaf2bclsa -> hien thi all fillter 
+
+
+
+
+
+llaf2bclsa() {
+    sudo fail2ban-client status |
+    grep "Jail list:" |
+    cut -d: -f2 |
+    tr ',' '\n' |
+    xargs -n1 |
+    while read -r jail; do
+        echo "===================================="
+        echo "JAIL: $jail"
+        echo "===================================="
+        sudo fail2ban-client status "$jail"
+        echo
+    done
+}
 
 
 
