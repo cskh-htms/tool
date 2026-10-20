@@ -543,6 +543,9 @@ alias lladkrsa='docker ps -aq | xargs -r docker start'
 
 #
 # docker images:--------------------------------------------
+alias lladkiml='docker images'
+alias lladkims='docker images'
+
 alias lladkimpaf='docker image prune -a -f'
 alias lladkidf='docker image ls -aq --no-trunc \
   | sort -u \
@@ -584,7 +587,8 @@ BEGIN {
 #
 # docker volume--------------------------------------------
 alias lladkvpa='docker volume prune --all'
-
+alias lladkvll='docker volume ls'
+alias lladkvls='docker volume ls'
 
 _lladkdfv() {
 python3 - <<'PY'
@@ -645,14 +649,14 @@ for index in sorted(sizes, key=sizes.get, reverse=True):
 PY
 }
 alias lladkvdf='_lladkdfv'
-
+#/ end of docker-
 
 
 
 
 #
 #
-# -----------------------------------------
+# ham chung -----------------------------------------
 _llakey() (
     action="$1"
     dir="$HOME/.ssh"
