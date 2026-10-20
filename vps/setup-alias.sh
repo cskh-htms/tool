@@ -586,7 +586,7 @@ BEGIN {
 #
 #
 # docker volume--------------------------------------------
-alias lladkvpa='docker volume prune --all'
+alias lladkvlpa='docker volume prune --all'
 alias lladkvll='docker volume ls'
 alias lladkvls='docker volume ls'
 
@@ -648,7 +648,7 @@ for index in sorted(sizes, key=sizes.get, reverse=True):
         print(f"{name:<55} {human(sizes[index]):>13}  {project:<28} {service}")
 PY
 }
-alias lladkvdf='_lladkdfv'
+alias lladkvldf='_lladkdfv'
 #/ end of docker-
 
 
