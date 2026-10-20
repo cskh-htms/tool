@@ -204,6 +204,8 @@ alias llavpstv="date '+%Y-%m-%d %H:%M:%S %Z (UTC%:z)'"
 alias llavpsts="date '+%Y-%m-%d %H:%M:%S %Z (UTC%:z)'"
 
 alias llavpsip='curl -4 https://api.ipify.org; echo'
+alias llavpsips='curl -4 https://api.ipify.org; echo'
+alias llavips='curl -4 https://api.ipify.org; echo'
 # llavpsp -> xem cac port cua vps
 
 #xem cac port nao dang su dung ung dung nao
