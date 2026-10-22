@@ -745,6 +745,7 @@ alias llakd='_llakey xoa'
 # tool-daihung:
 alias lladhp='docker pull cskhhtms/daihung_web:deploy_latest'
 alias lladhd='docker compose -p user_one_htms_daihung -f "$HOME/docker-compose-daihung-server.yml" up -d --no-deps web_daihung'
+alias lladhda='docker compose -p user_one_htms_daihung -f "$HOME/docker-compose-daihung-server.yml" up -d --no-deps'
 alias lladhsta='docker compose -p user_one_htms_daihung -f "$HOME/docker-compose-daihung-server.yml" up -d --no-deps web_daihung'
 alias lladhdw='docker compose -p user_one_htms_daihung -f "$HOME/docker-compose-daihung-server.yml" down'
 alias lladhdwv='docker compose -p user_one_htms_daihung -f "$HOME/docker-compose-daihung-server.yml" down -v'
@@ -770,6 +771,7 @@ alias lladhdte='COMPOSE_FILE="${COMPOSE_FILE:-$HOME/docker-compose-daihung-serve
 #
 alias llamdp='docker pull cskhhtms/minhdang_web:deploy_latest'
 alias llamdd='docker compose -p user_one_htms_minhdang -f "$HOME/docker-compose-minhdang-server.yml" up -d --no-deps web_minhdang'
+alias llamdda='docker compose -p user_one_htms_minhdang -f "$HOME/docker-compose-minhdang-server.yml" up -d --no-deps'
 alias llamdsta='docker compose -p user_one_htms_minhdang -f "$HOME/docker-compose-minhdang-server.yml" up -d --no-deps web_minhdang'
 alias llamddw='docker compose -p user_one_htms_minhdang -f "$HOME/docker-compose-minhdang-server.yml" down'
 alias llamddwv='docker compose -p user_one_htms_minhdang -f "$HOME/docker-compose-minhdang-server.yml" down -v'
@@ -788,6 +790,7 @@ alias llmddte='COMPOSE_FILE="${COMPOSE_FILE:-$HOME/docker-compose-minhdang-serve
 #
 alias llat3p='docker pull cskhhtms/minhdang_web:deploy_latest'
 alias llat3d='docker compose -p ubuntu_t3s -f "$HOME/docker-compose-t3s-server.yml" up -d --no-deps web_t3s'
+alias llat3da='docker compose -p ubuntu_t3s -f "$HOME/docker-compose-t3s-server.yml" up -d --no-deps'
 alias llat3sta='docker compose -p ubuntu_t3s -f "$HOME/docker-compose-t3s-server.yml" up -d --no-deps web_t3s'
 alias llat3dw='docker compose -p ubuntu_t3s -f "$HOME/docker-compose-t3s-server.yml" down'
 alias llat3dwv='docker compose -p ubuntu_t3s -f "$HOME/docker-compose-t3s-server.yml" down -v'
