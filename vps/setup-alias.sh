@@ -20,11 +20,6 @@ alias llaht='rm -rf ./tool-htms && git clone git@github.com:cskh-htms/tool-htms.
 alias llads='rm -rf ./tool-diem-sac && git clone git@github.com:cskh-htms/tool-diem-sac.git && find ./tool-diem-sac -type f -name "*.sh" -exec chmod +x {} \;'
 alias llaxd='rm -rf ./tool-xanh-demo && git clone git@github.com:cskh-htms/tool-xanh-demo.git && find ./tool-xanh-demo -type f -name "*.sh" -exec chmod +x {} \;'
 
-alias llamo='rm -rf ./htms_minio && git clone git@github.com:cskh-htms/htms_minio.git && find ./htms_minio -type f -name "*.sh" -exec chmod +x {} \;'
-alias llamnt='rm -rf ./htms_monitor && git clone git@github.com:cskh-htms/htms_monitor.git && find ./htms_monitor -type f -name "*.sh" -exec chmod +x {} \;'
-
-alias llamnol='rm -rf ./tool-minio-live && git clone git@github.com:cskh-htms/tool-minio-live.git && find ./tool-minio-live -type f -name "*.sh" -exec chmod +x {} \;'
-
 alias llagp='rm -rf ./tool-gpmb && git clone git@github.com:cskh-htms/tool-gpmb.git && find ./tool-gpmb -type f -name "*.sh" -exec chmod +x {} \;'
 alias lladt='rm -rf ./tool-dtc && git clone git@github.com:cskh-htms/tool-dtc.git && find ./tool-dtc -type f -name "*.sh" -exec chmod +x {} \;'
 
@@ -243,7 +238,6 @@ alias llasshrs='sudo systemctl restart ssh'
 #
 # monitor:
 alias llamntn='sudo nano /etc/web-monitor/sites.txt'
-
 alias llamntst='sudo bash ~/tool/scripts/monitor-me/install.sh'
 
 
