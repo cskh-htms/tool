@@ -43,6 +43,8 @@ alias llatpl='rm -rf ./tool-template && git clone git@github.com:cskh-htms/tool-
 alias llamt='rm -rf ./tool-maytinh && git clone git@github.com:cskh-htms/tool-maytinh.git && find ./tool-maytinh -type f -name "*.sh" -exec chmod +x {} \;'
 
 alias llald='rm -rf ./tool-landing && git clone git@github.com:cskh-htms/tool-landing.git && find ./tool-landing -type f -name "*.sh" -exec chmod +x {} \;'
+alias llaoo='rm -rf ./onlyoffice && git clone git@github.com:cskh-htms/onlyoffice.git && find ./onlyoffice -type f -name "*.sh" -exec chmod +x {} \;'
+
 
 
 
