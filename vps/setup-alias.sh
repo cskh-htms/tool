@@ -809,12 +809,12 @@ alias llat3adlsta='sudo -u ubuntu -H bash /home/ubuntu/tool-t3s/scripts/enable-a
 alias llat3bktele='sudo -u ubuntu -H bash /home/ubuntu/scripts/t3s/backup-database-to-telegram.sh'
 alias llat3bkclfl='sudo -u ubuntu -H bash /home/ubuntu/scripts/t3s/backup-uploads-to-cloudfly.sh'
 
-alias llt3ste='COMPOSE_FILE="${COMPOSE_FILE:-$HOME/docker-compose-t3s-server.yml}" DB_SERVICE="${DB_SERVICE:-db_t3s}" DB_CONTAINER="${DB_CONTAINER:-xanhlamdong_db_t3s}" DB_NAME="${DB_NAME:-xanhlamdong_db_t3s}" DB_USER="${DB_USER:-xanhlamdong_user_t3s}" LOCAL_FILE="${LOCAL_FILE:-$HOME/datas/structure-t3.sql}" ~/tool-daihung/scripts/daihung/export-structure-daihung-server.sh'
-alias llt3dte='COMPOSE_FILE="${COMPOSE_FILE:-$HOME/docker-compose-t3s-server.yml}" DB_SERVICE="${DB_SERVICE:-db_t3s}" DB_CONTAINER="${DB_CONTAINER:-xanhlamdong_db_t3s}" DB_NAME="${DB_NAME:-xanhlamdong_db_t3s}" DB_USER="${DB_USER:-xanhlamdong_user_t3s}" LOCAL_FILE="${LOCAL_FILE:-$HOME/datas/data-t3.sql}" ~/tool-daihung/scripts/daihung/export-datas-daihung-server.sh'
+alias llat3ste='COMPOSE_FILE="${COMPOSE_FILE:-$HOME/docker-compose-t3s-server.yml}" DB_SERVICE="${DB_SERVICE:-db_t3s}" DB_CONTAINER="${DB_CONTAINER:-xanhlamdong_db_t3s}" DB_NAME="${DB_NAME:-xanhlamdong_db_t3s}" DB_USER="${DB_USER:-xanhlamdong_user_t3s}" LOCAL_FILE="${LOCAL_FILE:-$HOME/datas/structure-t3.sql}" ~/tool-daihung/scripts/daihung/export-structure-daihung-server.sh'
+alias llat3dte='COMPOSE_FILE="${COMPOSE_FILE:-$HOME/docker-compose-t3s-server.yml}" DB_SERVICE="${DB_SERVICE:-db_t3s}" DB_CONTAINER="${DB_CONTAINER:-xanhlamdong_db_t3s}" DB_NAME="${DB_NAME:-xanhlamdong_db_t3s}" DB_USER="${DB_USER:-xanhlamdong_user_t3s}" LOCAL_FILE="${LOCAL_FILE:-$HOME/datas/data-t3.sql}" ~/tool-daihung/scripts/daihung/export-datas-daihung-server.sh'
 
 
 
-
+alias llat3ld='docker exec -it xanhlamdong_db_t3s psql -U xanhlamdong_user_t3s -d xanhlamdong_db_t3s'
 
 
 
@@ -836,7 +836,7 @@ alias lladsbktele='sudo -u ubuntu -H bash /home/ubuntu/scripts/diem-sac/backup-d
 alias lladsbkclfl='sudo -u ubuntu -H bash /home/ubuntu/scripts/s3-to-cloudfly-backup.sh --run'
 
 
-
+alias lladsld='docker exec -it diem_sac_db psql -U diem_sac_user -d diem_sac_db'
 
 
 #
