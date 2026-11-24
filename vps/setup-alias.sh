@@ -786,6 +786,11 @@ alias llamdbkclfl='sudo -u ubuntu -H bash /home/ubuntu/scripts/minhdang/backup-u
 alias llmdste='COMPOSE_FILE="${COMPOSE_FILE:-$HOME/docker-compose-minhdang-server.yml}" DB_SERVICE="${DB_SERVICE:-db_minhdang}" DB_CONTAINER="${DB_CONTAINER:-diem_sac_db_minhdang}" DB_NAME="${DB_NAME:-diem_sac_db_minhdang}" DB_USER="${DB_USER:-diem_sac_user_minhdang}" LOCAL_FILE="${LOCAL_FILE:-$HOME/datas/structure-md.sql}" ~/tool-daihung/scripts/daihung/export-structure-daihung-server.sh'
 alias llmddte='COMPOSE_FILE="${COMPOSE_FILE:-$HOME/docker-compose-minhdang-server.yml}" DB_SERVICE="${DB_SERVICE:-db_minhdang}" DB_CONTAINER="${DB_CONTAINER:-diem_sac_db_minhdang}" DB_NAME="${DB_NAME:-diem_sac_db_minhdang}" DB_USER="${DB_USER:-diem_sac_user_minhdang}" LOCAL_FILE="${LOCAL_FILE:-$HOME/datas/data-md.sql}" ~/tool-daihung/scripts/daihung/export-datas-daihung-server.sh'
 
+alias llamdld='docker exec -it diem_sac_db_minhdang psql -U diem_sac_user_minhdang -d diem_sac_db_minhdang'
+
+
+
+
 
 #
 # tool-t3s:
