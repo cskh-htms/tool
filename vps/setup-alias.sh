@@ -763,7 +763,7 @@ alias lladhste='COMPOSE_FILE="${COMPOSE_FILE:-$HOME/docker-compose-daihung-serve
 alias lladhdte='COMPOSE_FILE="${COMPOSE_FILE:-$HOME/docker-compose-daihung-server.yml}" DB_SERVICE="${DB_SERVICE:-db_daihung}" DB_CONTAINER="${DB_CONTAINER:-diem_sac_db_daihung}" DB_NAME="${DB_NAME:-diem_sac_db_daihung}" DB_USER="${DB_USER:-diem_sac_user_daihung}" ~/tool-daihung/scripts/daihung/export-datas-daihung-server.sh'
 
 
-
+alias lladhld='docker exec -it diem_sac_db_daihung psql -U diem_sac_user_daihung -d diem_sac_db_daihung'
 
 
 
